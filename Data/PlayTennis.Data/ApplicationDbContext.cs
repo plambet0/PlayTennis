@@ -25,21 +25,15 @@
 
         public DbSet<Club> Clubs { get; set; }
 
-        public DbSet<ClubImage> ClubImages { get; set; }
-
         public DbSet<Player> Players { get; set; }
 
         public DbSet<PlayerClub> PlayerClubs { get; set; }
-
-        public DbSet<PlayerImage> PlayerImages { get; set; }
 
         public DbSet<Reservation> Reservations { get; set; }
 
         public DbSet<Trainer> Trainers { get; set; }
 
         public DbSet<TrainerClub> TrainerClubs { get; set; }
-
-        public DbSet<TrainerImage> TrainerImages { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 
@@ -91,11 +85,6 @@
             }
 
             builder.Entity<Player>()
-                .HasMany(x => x.Images)
-                .WithOne(x => x.Player)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Player>()
                 .HasMany(x => x.FavoriteClubs)
                 .WithOne(x => x.Player)
                 .OnDelete(DeleteBehavior.Cascade);
@@ -103,11 +92,6 @@
             builder.Entity<Player>()
                 .HasMany(x => x.Reservations)
                 .WithOne(x => x.Player)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Club>()
-                .HasMany(x => x.Images)
-                .WithOne(x => x.Club)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Club>()
@@ -125,15 +109,6 @@
                 .WithOne(x => x.Club)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Club>()
-               .HasMany(x => x.Images)
-               .WithOne(x => x.Club)
-               .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Trainer>()
-               .HasMany(x => x.Images)
-               .WithOne(x => x.Trainer)
-               .OnDelete(DeleteBehavior.Cascade);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

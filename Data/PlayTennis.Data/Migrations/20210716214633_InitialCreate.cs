@@ -187,10 +187,11 @@ namespace PlayTennis.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Courts = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Surface = table.Column<int>(type: "int", nullable: false),
                     Town = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -198,8 +199,8 @@ namespace PlayTennis.Data.Migrations
                 {
                     table.PrimaryKey("PK_Clubs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clubs_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Clubs_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -214,9 +215,10 @@ namespace PlayTennis.Data.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Years = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Years = table.Column<int>(type: "int", nullable: false),
                     Hand = table.Column<int>(type: "int", nullable: false),
                     BackHand = table.Column<int>(type: "int", nullable: false),
                     PreferredSurface = table.Column<int>(type: "int", nullable: false),
@@ -248,9 +250,10 @@ namespace PlayTennis.Data.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Years = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Years = table.Column<int>(type: "int", nullable: false),
                     TrainerSince = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -268,30 +271,6 @@ namespace PlayTennis.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClubImages",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClubId = table.Column<int>(type: "int", nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RemoteImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClubImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ClubImages_Clubs_ClubId",
-                        column: x => x.ClubId,
-                        principalTable: "Clubs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,30 +293,6 @@ namespace PlayTennis.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PlayerClubs_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PlayerImages",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RemoteImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PlayerImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PlayerImages_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
                         principalColumn: "Id",
@@ -397,30 +352,6 @@ namespace PlayTennis.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TrainerImages",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TrainerId = table.Column<int>(type: "int", nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RemoteImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrainerImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TrainerImages_Trainers_TrainerId",
-                        column: x => x.TrainerId,
-                        principalTable: "Trainers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -471,19 +402,9 @@ namespace PlayTennis.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClubImages_ClubId",
-                table: "ClubImages",
-                column: "ClubId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClubImages_IsDeleted",
-                table: "ClubImages",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clubs_UserId",
+                name: "IX_Clubs_AddedByUserId",
                 table: "Clubs",
-                column: "UserId");
+                column: "AddedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerClubs_ClubId",
@@ -493,16 +414,6 @@ namespace PlayTennis.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerClubs_PlayerId",
                 table: "PlayerClubs",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlayerImages_IsDeleted",
-                table: "PlayerImages",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlayerImages_PlayerId",
-                table: "PlayerImages",
                 column: "PlayerId");
 
             migrationBuilder.CreateIndex(
@@ -536,16 +447,6 @@ namespace PlayTennis.Data.Migrations
                 column: "TrainerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TrainerImages_IsDeleted",
-                table: "TrainerImages",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrainerImages_TrainerId",
-                table: "TrainerImages",
-                column: "TrainerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Trainers_UserId",
                 table: "Trainers",
                 column: "UserId");
@@ -569,13 +470,7 @@ namespace PlayTennis.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ClubImages");
-
-            migrationBuilder.DropTable(
                 name: "PlayerClubs");
-
-            migrationBuilder.DropTable(
-                name: "PlayerImages");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
@@ -585,9 +480,6 @@ namespace PlayTennis.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "TrainerClubs");
-
-            migrationBuilder.DropTable(
-                name: "TrainerImages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

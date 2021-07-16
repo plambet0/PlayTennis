@@ -10,7 +10,7 @@ using PlayTennis.Data;
 namespace PlayTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210716173709_InitialCreate")]
+    [Migration("20210716214633_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,6 +252,9 @@ namespace PlayTennis.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,6 +263,9 @@ namespace PlayTennis.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -276,49 +282,11 @@ namespace PlayTennis.Data.Migrations
                     b.Property<int>("Town")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AddedByUserId");
 
                     b.ToTable("Clubs");
-                });
-
-            modelBuilder.Entity("PlayTennis.Data.Models.ClubImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ClubId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClubId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("ClubImages");
                 });
 
             modelBuilder.Entity("PlayTennis.Data.Models.Player", b =>
@@ -343,11 +311,14 @@ namespace PlayTennis.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<int>("Hand")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -373,8 +344,8 @@ namespace PlayTennis.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Years")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Years")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -403,41 +374,6 @@ namespace PlayTennis.Data.Migrations
                     b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerClubs");
-                });
-
-            modelBuilder.Entity("PlayTennis.Data.Models.PlayerImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PlayerId");
-
-                    b.ToTable("PlayerImages");
                 });
 
             modelBuilder.Entity("PlayTennis.Data.Models.Reservation", b =>
@@ -516,7 +452,10 @@ namespace PlayTennis.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -540,8 +479,8 @@ namespace PlayTennis.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Years")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Years")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -570,41 +509,6 @@ namespace PlayTennis.Data.Migrations
                     b.HasIndex("TrainerId");
 
                     b.ToTable("TrainerClubs");
-                });
-
-            modelBuilder.Entity("PlayTennis.Data.Models.TrainerImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TrainerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("TrainerId");
-
-                    b.ToTable("TrainerImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -660,22 +564,11 @@ namespace PlayTennis.Data.Migrations
 
             modelBuilder.Entity("PlayTennis.Data.Models.Club", b =>
                 {
-                    b.HasOne("PlayTennis.Data.Models.ApplicationUser", "User")
+                    b.HasOne("PlayTennis.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AddedByUserId");
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PlayTennis.Data.Models.ClubImage", b =>
-                {
-                    b.HasOne("PlayTennis.Data.Models.Club", "Club")
-                        .WithMany("Images")
-                        .HasForeignKey("ClubId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Club");
+                    b.Navigation("AddedByUser");
                 });
 
             modelBuilder.Entity("PlayTennis.Data.Models.Player", b =>
@@ -702,17 +595,6 @@ namespace PlayTennis.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Club");
-
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("PlayTennis.Data.Models.PlayerImage", b =>
-                {
-                    b.HasOne("PlayTennis.Data.Models.Player", "Player")
-                        .WithMany("Images")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Player");
                 });
@@ -764,17 +646,6 @@ namespace PlayTennis.Data.Migrations
                     b.Navigation("Trainer");
                 });
 
-            modelBuilder.Entity("PlayTennis.Data.Models.TrainerImage", b =>
-                {
-                    b.HasOne("PlayTennis.Data.Models.Trainer", "Trainer")
-                        .WithMany("Images")
-                        .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Trainer");
-                });
-
             modelBuilder.Entity("PlayTennis.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -786,8 +657,6 @@ namespace PlayTennis.Data.Migrations
 
             modelBuilder.Entity("PlayTennis.Data.Models.Club", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Players");
 
                     b.Navigation("Reservations");
@@ -799,16 +668,12 @@ namespace PlayTennis.Data.Migrations
                 {
                     b.Navigation("FavoriteClubs");
 
-                    b.Navigation("Images");
-
                     b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("PlayTennis.Data.Models.Trainer", b =>
                 {
                     b.Navigation("Clubs");
-
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
