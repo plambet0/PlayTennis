@@ -1,9 +1,8 @@
 ﻿namespace PlayTennis.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using PlayTennis.Data.Models;
     using PlayTennis.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

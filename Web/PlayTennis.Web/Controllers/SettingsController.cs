@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data.Common.Repositories;
     using PlayTennis.Data.Models;
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using PlayTennis.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using PlayTennis.Web.ViewModels;
 
     public class HomeController : BaseController
     {

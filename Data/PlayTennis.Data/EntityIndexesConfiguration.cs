@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using PlayTennis.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using PlayTennis.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

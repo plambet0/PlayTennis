@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using PlayTennis.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using PlayTennis.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

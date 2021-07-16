@@ -3,9 +3,8 @@ namespace PlayTennis.Data.Models
 {
     using System;
 
-    using PlayTennis.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using PlayTennis.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

@@ -1,9 +1,8 @@
 ﻿namespace PlayTennis.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

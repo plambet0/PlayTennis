@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using PlayTennis.Common;
-    using PlayTennis.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using PlayTennis.Common;
+    using PlayTennis.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {
