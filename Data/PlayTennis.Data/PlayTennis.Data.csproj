@@ -44,4 +44,8 @@
     <ProjectReference Include="..\PlayTennis.Data.Models\PlayTennis.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
