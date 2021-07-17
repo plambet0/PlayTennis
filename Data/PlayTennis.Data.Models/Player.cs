@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using PlayTennis.Data.Common.Models;
 
     public class Player : BaseModel<int>
@@ -17,15 +17,18 @@
 
         public ApplicationUser User { get; set; }
 
+        [Required]
+        [MaxLength(10)]
         public string FirstName { get; set; }
 
+        [Required]
+        [MaxLength(10)]
         public string LastName { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
 
         public Gender Gender { get; set; }
-
-        public DateTime Birthdate { get; set; }
 
         public int Years { get; set; }
 
@@ -35,12 +38,14 @@
 
         public Surface PreferredSurface { get; set; }
 
-        public DateTime PlaySince { get; set; }
+        public int PlaySinceInYears { get; set; }
 
         public int PlayFrequencyInHoursPerWeek { get; set; }
 
+        [Required]
         public string PhoneNumber { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
         public virtual Town Town { get; set; }

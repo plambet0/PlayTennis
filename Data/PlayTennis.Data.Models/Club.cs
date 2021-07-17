@@ -1,7 +1,7 @@
 ﻿namespace PlayTennis.Data.Models
 {
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using PlayTennis.Data.Common.Models;
 
     public class Club : BaseModel<int>
@@ -13,12 +13,16 @@
             this.Reservations = new HashSet<Reservation>();
         }
 
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
         public int Courts { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
 
         public decimal PricePerHour { get; set; }
