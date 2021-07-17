@@ -59,5 +59,29 @@
             // TODO: Redirect to recipe info page
             return this.Redirect("/Home/Index");
         }
+
+        public IActionResult All(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int itemsPerPage = 12;
+            var players = this.playerService.GetAll(1, itemsPerPage);
+            var viewModel = new AllPlayersViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                Players = players,
+                
+            };
+            return this.View(viewModel);
+        }
+
+        public IActionResult Details(int playerId)
+        {
+            return this.View();
+        }
     }
 }

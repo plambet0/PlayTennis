@@ -1,6 +1,7 @@
 ﻿namespace PlayTennis.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -28,11 +29,11 @@
                 Town = input.Town,
                 BackHand = input.BackHand,
                 Hand = input.Hand,
-                Birthdate = input.Birthdate,
                 Email = input.Email,
                 PhoneNumber = input.PhoneNumber,
-                PlaySince = input.PlaySince,
                 PlayFrequencyInHoursPerWeek = input.PlayFrequencyInHoursPerWeek,
+                PlaySinceInYears = input.PlaySinceInYears,
+                ImageUrl = input.ImageUrl,
                 PreferredSurface = input.PreferredSurface,
                 Years = input.Years,
                 UserId = userId,
@@ -40,6 +41,25 @@
 
             await this.playersRepository.AddAsync(player);
             await this.playersRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<PlayersViewModel> GetAll(int page, int itemsPerPage = 12)
+        {
+            var players = this.playersRepository.AllAsNoTracking()
+                 .OrderByDescending(x => x.Id)
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
+                 .Select(x => new PlayersViewModel
+                 {
+                      
+                      FullName = x.FirstName + " " + x.LastName,
+                      ImageUrl = x.ImageUrl,
+                      Town = x.Town.ToString(),
+                      Years = x.Years,
+                      Id = x.Id,
+                 })
+                 .ToList();
+            return players;
         }
     }
 }

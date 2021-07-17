@@ -10,6 +10,8 @@ namespace PlayTennis.Web.ViewModels.Player
 
     public class PlayerInputModel
     {
+        
+
         [Required]
         [MaxLength(10)]
         public string FirstName { get; set; }
