@@ -1,9 +1,27 @@
 ﻿@using PlayTennis.Common
+@model  IndexViewModel;
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Reserve court, find players, play tennis now!</a>.</p>
-</div>
+    <div id="slider">
+        <img src="~/780473.jpg" width="1000" height="350">
+        <p>Reserve court, find players, play tennis now!</p>
+    </div>
+
+    <div class="jumbotron">
+        <div class="row">
+            <h2 class="col-md-4 text-center">
+                @Model.Players Players
+            </h2>
+            <h2 class="col-md-4 text-center" ">
+                @Model.ClubsCount Clubs
+            </h2>
+            <h2 class="col-md-4 text-center" ">
+                @Model.Reservations Reservations
+            </h2>
+        </div>
+    </div>
+

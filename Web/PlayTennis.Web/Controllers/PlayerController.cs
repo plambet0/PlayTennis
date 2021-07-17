@@ -56,8 +56,7 @@
 
             this.TempData["Message"] = "Player added successfully.";
 
-            // TODO: Redirect to recipe info page
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult All(int id = 1)
