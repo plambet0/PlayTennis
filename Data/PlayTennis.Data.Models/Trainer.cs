@@ -10,7 +10,6 @@
         public Trainer()
         {
             this.Clubs = new HashSet<TrainerClub>();
-            this.Images = new HashSet<TrainerImage>();
         }
 
         public string UserId { get; set; }
@@ -21,11 +20,13 @@
 
         public string LastName { get; set; }
 
-        public string Gender { get; set; }
+        public string ImageUrl { get; set; }
+
+        public Gender Gender { get; set; }
 
         public DateTime Birthdate { get; set; }
 
-        public string Years { get; set; }
+        public int Years { get; set; }
 
         public DateTime TrainerSince { get; set; }
 
@@ -38,7 +39,5 @@
         public virtual Town Town { get; set; }
 
         public virtual ICollection<TrainerClub> Clubs { get; set; }
-
-        public virtual ICollection<TrainerImage> Images { get; set; }
     }
 }

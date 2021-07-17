@@ -10,7 +10,6 @@
         {
             this.Players = new HashSet<PlayerClub>();
             this.Trainers = new HashSet<TrainerClub>();
-            this.Images = new HashSet<ClubImage>();
             this.Reservations = new HashSet<Reservation>();
         }
 
@@ -19,6 +18,8 @@
         public string Address { get; set; }
 
         public int Courts { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public decimal PricePerHour { get; set; }
 
@@ -29,8 +30,6 @@
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
-
-        public virtual ICollection<ClubImage> Images { get; set; }
 
         public virtual ICollection<TrainerClub> Trainers { get; set; }
 

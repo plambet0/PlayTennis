@@ -1,0 +1,91 @@
+﻿@model PlayerInputModel;
+
+@{
+    ViewBag.Title = "Become a Player";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender "></label>
+                <select asp-for="Gender" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Gender>()">
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthdate"></label>
+                <input asp-for="Birthdate" class="form-control" placeholder="@DateTime.UtcNow.Year">
+                <span asp-validation-for="Birthdate" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Years"></label>
+                <input asp-for="Years" class="form-control">
+                <span asp-validation-for="Years" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hand "></label>
+                <select asp-for="Hand" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Hand>()">
+                </select>
+                <span asp-validation-for="Hand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BackHand "></label>
+                <select asp-for="BackHand" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.BackHand>()">
+                </select>
+                <span asp-validation-for="BackHand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreferredSurface "></label>
+                <select asp-for="PreferredSurface" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Surface>()">
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaySince"></label>
+                <input asp-for="PlaySince" class="form-control">
+                <span asp-validation-for="PlaySince" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control">
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Town "></label>
+                <select asp-for="Town" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Town>()">
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+
+            <input class="btn btn-primary mt-3" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

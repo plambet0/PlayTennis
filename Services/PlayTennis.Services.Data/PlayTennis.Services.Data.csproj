@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\PlayTennis.Data.Common\PlayTennis.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\PlayTennis.Data.Models\PlayTennis.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\PlayTennis.Web.ViewModels\PlayTennis.Web.ViewModels.csproj" />
     <ProjectReference Include="..\PlayTennis.Services.Mapping\PlayTennis.Services.Mapping.csproj" />
   </ItemGroup>
 
