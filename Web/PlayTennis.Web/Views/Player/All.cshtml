@@ -15,7 +15,7 @@
                 <img class="card-img-top" src="@player.ImageUrl" alt="@player.FullName @player.Years @player.Town">
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@player.FullName @player.Years @player.Town</h5>
-                    <a asp-controller="Cars" asp-action="Details" asp-route-id="@player.Id" class="btn btn-primary">View More</a>
+                    <a asp-controller="Player" asp-action="Details" asp-route-id="@player.Id" class="btn btn-primary">View More</a>
                 </div>
             </div>
         </div>

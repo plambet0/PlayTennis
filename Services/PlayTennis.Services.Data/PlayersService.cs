@@ -13,10 +13,12 @@
     public class PlayersService : IPlayersService
     {
         private readonly IRepository<Player> playersRepository;
+        private readonly IRepository<Trainer> trainerRepository;
 
-        public PlayersService(IRepository<Player> playersRepository)
+        public PlayersService(IRepository<Player> playersRepository, IRepository<Trainer> trainerRepository)
         {
             this.playersRepository = playersRepository;
+            this.trainerRepository = trainerRepository;
         }
 
         public async Task CreateAsync(PlayerInputModel input, string userId)
@@ -60,6 +62,17 @@
                  })
                  .ToList();
             return players;
+        }
+
+        public bool IsATrainer(string userId)
+        {
+            var player = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+            if (player == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

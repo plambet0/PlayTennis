@@ -10,5 +10,7 @@
         Task CreateAsync(PlayerInputModel input, string userId);
 
         IEnumerable<PlayersViewModel> GetAll(int page, int itemsPerPage = 12);
+
+        bool IsATrainer(string userId);
     }
 }

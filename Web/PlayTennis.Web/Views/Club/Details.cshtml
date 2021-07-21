@@ -1,0 +1,21 @@
+﻿@model ClubsViewModel;
+@{ this.ViewData["Title"] = "Club: " + Model.Name; }
+
+<div class="row row-eq-height">
+    <!-- Info Box -->
+    <div class="col-lg-4 info_box_col">
+        <div class="info_box">
+            <div class="info_image"><img src="@Model.ImageUrl" alt=""></div>
+            <div class="info_content">
+                <div class="info_title">@Model.Name</div>
+                <div class="info_text">Town: <strong>@Model.Town</strong></div>
+                <div class="info_text">Address: <strong>@Model.Address</strong></div>
+                <div class="info_text">Number Of Courts: <strong>@Model.Courts</strong></div>
+                <div class="info_text">Price: <strong>@Model.PricePerHour lv./hour</strong></div>
+                <div class="info_text">Surface: <strong>@Model.Surface</strong></div>
+                <div class="button info_button">
+                    <a asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id" class="btn btn-primary">Add To Favorites</a>
+                    <a asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id" class="btn btn-primary">RESERVE COURT</a>
+                </div>
+        </div>
+    </div>

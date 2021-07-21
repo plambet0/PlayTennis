@@ -12,14 +12,18 @@ namespace PlayTennis.Services.Data
         private readonly IRepository<Player> playerRepository;
         private readonly IRepository<Reservation> reservationRepository;
         private readonly IRepository<Club> clubRepostirory;
+        private readonly IRepository<Trainer> trainerRepository;
 
-        public HomePageCountsService(IRepository<Player> playerRepository,
+        public HomePageCountsService(
+            IRepository<Player> playerRepository,
             IRepository<Reservation> reservationRepository,
-            IRepository<Club> clubRepostirory)
+            IRepository<Club> clubRepostirory,
+            IRepository<Trainer> trainerRepository)
         {
             this.playerRepository = playerRepository;
             this.reservationRepository = reservationRepository;
             this.clubRepostirory = clubRepostirory;
+            this.trainerRepository = trainerRepository;
         }
 
         public IndexViewModel GetCounts()
@@ -29,6 +33,7 @@ namespace PlayTennis.Services.Data
                 ClubsCount = this.clubRepostirory.All().Count(),
                 Players = this.playerRepository.All().Count(),
                 Reservations = this.reservationRepository.All().Count(),
+                Trainers = this.trainerRepository.All().Count(),
             };
 
             return data;

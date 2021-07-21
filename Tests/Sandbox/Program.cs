@@ -55,6 +55,7 @@
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
+
         }
 
         private static void ConfigureServices(ServiceCollection services)

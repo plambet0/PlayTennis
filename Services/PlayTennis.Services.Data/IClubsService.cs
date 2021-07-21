@@ -10,6 +10,8 @@ namespace PlayTennis.Services.Data
     {
         Task CreateAsync(ClubInputModel input, string userId);
 
-        // IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12);
+        IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12);
+
+        ClubsViewModel GetById(int id);
     }
 }

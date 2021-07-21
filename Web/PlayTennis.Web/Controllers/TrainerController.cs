@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PlayTennis.Data;
 using PlayTennis.Data.Models;
 using PlayTennis.Services.Data;
-using PlayTennis.Web.ViewModels.Club;
+using PlayTennis.Web.ViewModels.Trainer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +10,15 @@ using System.Threading.Tasks;
 
 namespace PlayTennis.Web.Controllers
 {
-    public class ClubController : Controller
+    public class TrainerController : Controller
     {
-        private readonly IClubsService clubsService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ApplicationDbContext applicationDbContext;
+        private readonly ITrainersService trainersService;
 
-        public ClubController(IClubsService clubsService, UserManager<ApplicationUser> userManager, ApplicationDbContext applicationDbContext)
+        public TrainerController(UserManager<ApplicationUser> userManager, ITrainersService trainersService)
         {
-            this.clubsService = clubsService;
             this.userManager = userManager;
-            this.applicationDbContext = applicationDbContext;
+            this.trainersService = trainersService;
         }
         
         public IActionResult Add()
@@ -30,17 +27,22 @@ namespace PlayTennis.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(ClubInputModel input)
+        public async Task<IActionResult> AddAsync(TrainerInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
+            
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
+            if (this.trainersService.IsAPlayer(user.Id))
+            {
+                return this.View("YouCannotRegisterATrainer");
+            }
             try
             {
-                await this.clubsService.CreateAsync(input, user.Id);
+                await this.trainersService.CreateAsync(input, user.Id);
             }
             catch (Exception ex)
             {
@@ -48,9 +50,9 @@ namespace PlayTennis.Web.Controllers
                 return this.View(input);
             }
 
-            this.TempData["Message"] = "Club added successfully.";
+            this.TempData["Message"] = "Trainer added successfully.";
 
-            return this.RedirectToAction(nameof(this.All));
+            return this.Redirect("/");
         }
 
         public IActionResult All(int id = 1)
@@ -61,21 +63,14 @@ namespace PlayTennis.Web.Controllers
             }
 
             const int itemsPerPage = 12;
-            var clubs = this.clubsService.GetAll(1, itemsPerPage);
-            var viewModel = new AllClubsViewModel
+            var trainers = this.trainersService.GetAll(1, itemsPerPage);
+            var viewModel = new AllTrainersViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
-                Clubs = clubs,
-
+                Trainers = trainers,
             };
             return this.View(viewModel);
-        }
-
-        public ActionResult Details(int id)
-        {
-            var club = this.clubsService.GetById(id);
-            return this.View(club);
         }
     }
 }

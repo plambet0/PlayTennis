@@ -27,6 +27,7 @@
                  ClubsCount = counts.ClubsCount,
                  Players = counts.Players,
                  Reservations = counts.Reservations,
+                 Trainers = counts.Trainers,
             };
             return this.View(viewModel);
         }

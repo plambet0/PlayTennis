@@ -1,0 +1,136 @@
+﻿
+
+@model ReservationViewModel;
+@{ this.ViewData["Title"] = "Make A Reservation"; }
+@section Styles {
+    <link href="~/css/date-picker.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="container-fluid ">
+    <div class="row justify-content-center mx-0">
+        <div class="col-lg-6">
+            <div class="card">
+                <form autocomplete="off">
+                    <div class="card-header">
+                        <div class="mx-0 mb-0 row justify-content-sm-center justify-content-start px-1">
+                            <input type="text" id="dp1" class="datepicker" placeholder="&#xf073; Pick Date" style="font-family:Arial, FontAwesome" name="date" readonly />
+                        </div>
+                    </div>
+                    <div class="card-body p-3 p-sm-5">
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">07:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">08:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">09:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">10:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">11:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">12:00</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">13:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">14:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">15:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">16:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">17:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">18:00</div>
+                            </div>
+                        </div>
+                        <div class="row text-center mx-0">
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">19:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">20:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">21:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">22:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">23:00</div>
+                            </div>
+                            <div class="col-md-2 col-4 my-1 px-2">
+                                <div class="cell py-1">24:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Club</label>
+        <div class="col-sm-10">
+            <div class="form-control">@Model.Name</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <div class="form-control">@Model.Town, @Model.Address</div>
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="ClubId" value="@Model.ClubId" class="form-control" hidden>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Date</label>
+            <div class="col-sm-10">
+                <div id="selectedDate" asp-for="@Model.Date" class="form-control" hidden></div>
+                <input asp-for="@Model.Date" value="" class="form-control" required readonly />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Time</label>
+            <div class="col-sm-10">
+                <div id="selectedTime" asp-for="@Model.Time" class="form-control" hidden></div>
+                <input asp-for="@Model.Time" value="" class="form-control" required readonly />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <div class="col-sm-10">
+                <button type="submit" class="button button-large button_1 elements_button my-2"
+                        asp-area="" asp-controller="Reservation" asp-action="MakeAReservation">
+                    Make A Reservation
+                </button>
+            </div>
+        </div>
+    </form>
+    <div asp-validation-summary="All" data-valmsg-summary="true"></div>
+</div>
+
+@section Scripts {
+    <script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
+    <script src="~/js/date-picker.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+    $.validator.setDefaults({
+            ignore: ""
+        })</script>
+}

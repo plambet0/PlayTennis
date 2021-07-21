@@ -1,7 +1,7 @@
-﻿@model PlayerInputModel;
+﻿@model TrainerInputModel;
 
 @{
-    ViewBag.Title = "Become Player";
+    ViewBag.Title = "Become Trainer";
 }
 
 <div class="row">
@@ -32,35 +32,19 @@
                 <span asp-validation-for="Years" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Hand "></label>
-                <select asp-for="Hand" class="form-control" asp-items="@Html.GetEnumSelectList
-                <PlayTennis.Data.Models.Hand>()">
-                </select>
-                <span asp-validation-for="Hand" class="text-danger"></span>
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BackHand "></label>
-                <select asp-for="BackHand" class="form-control" asp-items="@Html.GetEnumSelectList
-                <PlayTennis.Data.Models.BackHand>()">
-                </select>
-                <span asp-validation-for="BackHand" class="text-danger"></span>
+                <label asp-for="TrainerSinceInYears"></label>
+                <input asp-for="TrainerSinceInYears" class="form-control">
+                <span asp-validation-for="TrainerSinceInYears" class="small text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PreferredSurface "></label>
-                <select asp-for="PreferredSurface" class="form-control" asp-items="@Html.GetEnumSelectList
-                <PlayTennis.Data.Models.Surface>()">
-                </select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlaySinceInYears"></label>
-                <input asp-for="PlaySinceInYears" class="form-control">
-                <span asp-validation-for="PlaySinceInYears" class="small text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlayFrequencyInHoursPerWeek"></label>
-                <input asp-for="PlayFrequencyInHoursPerWeek" class="form-control">
-                <span asp-validation-for="PlayFrequencyInHoursPerWeek" class="small text-danger"></span>
+                <label asp-for="PricePerHour"></label>
+                <input asp-for="PricePerHour" class="form-control">
+                <span asp-validation-for="PricePerHour" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber"></label>
@@ -78,12 +62,7 @@
                 <PlayTennis.Data.Models.Town>()">
                 </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUrl"></label>
-                <input asp-for="ImageUrl" class="form-control">
-                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
-            </div>
+            
 
             <input class="btn btn-primary mt-3" type="submit" value="Save" />
         </form>

@@ -44,6 +44,10 @@
 
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
+            if (this.playerService.IsATrainer(user.Id))
+            {
+                return this.View("YouCannotRegisterAPlayer");
+            }
             try
             {
                 await this.playerService.CreateAsync(input, user.Id);
@@ -73,7 +77,6 @@
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Players = players,
-                
             };
             return this.View(viewModel);
         }
