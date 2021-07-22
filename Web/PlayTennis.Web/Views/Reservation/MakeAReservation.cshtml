@@ -87,17 +87,22 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Club</label>
         <div class="col-sm-10">
-            <div class="form-control">@Model.Name</div>
+            <input asp-for="@Model.Name" value="@Model.Name" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Town</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Town" value="@Model.Town" class="form-control" disabled>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-            <div class="form-control">@Model.Town, @Model.Address</div>
+            <input asp-for="@Model.Address" value="@Model.Address" class="form-control" disabled>
         </div>
     </div>
     <form method="post" enctype="multipart/form-data">
-        <input asp-for="ClubId" value="@Model.ClubId" class="form-control" hidden>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date</label>
             <div class="col-sm-10">
@@ -117,7 +122,7 @@
         <div class="form-group row mt-4">
             <div class="col-sm-10">
                 <button type="submit" class="button button-large button_1 elements_button my-2"
-                        asp-area="" asp-controller="Reservation" asp-action="MakeAReservation">
+                        asp-area="" asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.ClubId">
                     Make A Reservation
                 </button>
             </div>

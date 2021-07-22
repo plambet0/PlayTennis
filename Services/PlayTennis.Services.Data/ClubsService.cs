@@ -29,6 +29,7 @@ namespace PlayTennis.Services.Data
                 ImageUrl = input.ImageUrl,
                 Surface = input.Surface,
                 PricePerHour = input.PricePerHour,
+                AddedByUserId = userId,
 
 
             };

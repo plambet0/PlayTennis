@@ -67,7 +67,7 @@ namespace PlayTennis.Web.Controllers
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Clubs = clubs,
-
+                 
             };
             return this.View(viewModel);
         }

@@ -18,4 +18,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\PlayTennis.Common\PlayTennis.Common.csproj" />
+  </ItemGroup>
+
 </Project>

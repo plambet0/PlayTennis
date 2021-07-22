@@ -15,11 +15,13 @@ namespace PlayTennis.Web.ViewModels.Reservation
         public string Town { get; set; }
 
         [Required]
-
+       
         public string Date { get; set; }
 
         [Required]
-
+       
         public string Time { get; set; }
+
+        
     }
 }

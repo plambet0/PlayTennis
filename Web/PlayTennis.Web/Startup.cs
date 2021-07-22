@@ -16,6 +16,7 @@
     using PlayTennis.Data.Models;
     using PlayTennis.Data.Repositories;
     using PlayTennis.Data.Seeding;
+    using PlayTennis.Services;
     using PlayTennis.Services.Data;
     using PlayTennis.Services.Mapping;
     using PlayTennis.Services.Messaging;
@@ -68,6 +69,8 @@
             services.AddTransient<IHomePageCountsService, HomePageCountsService>();
             services.AddTransient<IClubsService, ClubsService>();
             services.AddTransient<ITrainersService, TrainerService>();
+            services.AddTransient<IReservationsService, ReservationsService>();
+            services.AddTransient<IDateTimeParseService, DateTimeParseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
