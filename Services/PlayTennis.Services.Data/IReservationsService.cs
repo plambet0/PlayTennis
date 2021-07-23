@@ -9,5 +9,7 @@ namespace PlayTennis.Services.Data
     public interface IReservationsService
     {
         Task CreateAsync(ReservationViewModel input, int playerId, DateTime dateTime, int clubId);
+
+        IEnumerable<ReservationListViewModel> GetAllById(string userId);
     }
 }

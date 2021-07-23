@@ -64,6 +64,19 @@
             return players;
         }
 
+        public PlayersViewModel GetById(string userId)
+        {
+            var player = this.playersRepository.All().Where(x => x.UserId == userId)
+                .Select(x=> new PlayersViewModel
+                {
+                     Id = x.Id,
+                     
+                }).FirstOrDefault();
+
+            return player;
+            
+        }
+
         public bool IsATrainer(string userId)
         {
             var player = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();

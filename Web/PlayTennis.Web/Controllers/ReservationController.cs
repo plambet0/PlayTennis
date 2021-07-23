@@ -1,5 +1,10 @@
 ﻿namespace PlayTennis.Web.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data;
@@ -7,22 +12,36 @@
     using PlayTennis.Services;
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Reservation;
-    using System;
-    using System.Linq;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     public class ReservationController : Controller
     {
         private readonly ApplicationDbContext db;
         private readonly IDateTimeParseService dateTimeParseService;
         private readonly IReservationsService reservationsService;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IPlayersService playersService;
 
-        public ReservationController(ApplicationDbContext db, IDateTimeParseService dateTimeParseService, IReservationsService reservationsService)
+        public ReservationController(ApplicationDbContext db, IDateTimeParseService dateTimeParseService, IReservationsService reservationsService,
+            UserManager<ApplicationUser> userManager, IPlayersService playersService)
         {
             this.db = db;
             this.dateTimeParseService = dateTimeParseService;
             this.reservationsService = reservationsService;
+            this.userManager = userManager;
+            this.playersService = playersService;
+        }
+        public IActionResult All()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+
+            var reservations = this.reservationsService.GetAllById(userId);
+            var viewModel = new AllReservationListViewModel
+            {
+              
+                Reservations = reservations,
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult MakeAReservation(int id)
