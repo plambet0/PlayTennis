@@ -1,15 +1,21 @@
-﻿using PlayTennis.Web.ViewModels.Reservation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using PlayTennis.Web.ViewModels.Reservation;
+
     public interface IReservationsService
     {
-        Task CreateAsync(ReservationViewModel input, int playerId, DateTime dateTime, int clubId);
+        Task CreateAsync(ReservationViewModel input, string userId, DateTime dateTime, int clubId);
 
         IEnumerable<ReservationListViewModel> GetAllById(string userId);
+
+        ReservationListViewModel GetById(int id);
+
+        Task DeleteAsync(int id);
+
+
     }
 }

@@ -1,15 +1,11 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-
-namespace PlayTennis.Web.ViewModels.Club
+﻿namespace PlayTennis.Web.ViewModels.Club
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ClubsViewModel
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(30)]
         public string Name { get; set; }
 
         [Required]

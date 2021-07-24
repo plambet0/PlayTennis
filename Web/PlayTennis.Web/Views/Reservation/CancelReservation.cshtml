@@ -1,0 +1,38 @@
+﻿@model ReservationListViewModel;
+@{ this.ViewData["Title"] = "Cancel Reservation"; }
+
+<h3><strong>Are you sure you want to cancel this reservation?</strong></h3>
+<form class="col-6 mt-5">
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Date and Time</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.DateTime</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Club</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.ClubName</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Address</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.ClubAddress</div>
+        </div>
+    </div>
+</form>
+
+<div class="col-6 mt-5 ml-5">
+    <div class="row ml-5">
+        <form method="post">
+            <button type="submit" class="btn btn-outline-success"
+                    asp-area="" asp-controller="Reservation" asp-action="Delete" asp-route-id="@Model.Id">
+                Yes, Cancel it!
+            </button>
+        </form>
+        <div class="ml-5">
+            <a class="btn btn-danger" asp-area="" asp-controller="Reservation" asp-action="All">No! Go Back</a>
+        </div>
+    </div>
+</div>

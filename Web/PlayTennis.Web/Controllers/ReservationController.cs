@@ -21,8 +21,12 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPlayersService playersService;
 
-        public ReservationController(ApplicationDbContext db, IDateTimeParseService dateTimeParseService, IReservationsService reservationsService,
-            UserManager<ApplicationUser> userManager, IPlayersService playersService)
+        public ReservationController(
+            ApplicationDbContext db,
+            IDateTimeParseService dateTimeParseService,
+            IReservationsService reservationsService,
+            UserManager<ApplicationUser> userManager,
+            IPlayersService playersService)
         {
             this.db = db;
             this.dateTimeParseService = dateTimeParseService;
@@ -30,16 +34,14 @@
             this.userManager = userManager;
             this.playersService = playersService;
         }
+
         public IActionResult All()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
-
             var reservations = this.reservationsService.GetAllById(userId);
             var viewModel = new AllReservationListViewModel
             {
-              
-                Reservations = reservations,
+              Reservations = reservations,
             };
             return this.View(viewModel);
         }
@@ -47,14 +49,13 @@
         public IActionResult MakeAReservation(int id)
         {
             var club = this.db.Clubs.Where(x => x.Id == id).FirstOrDefault();
-
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var viewModel = new ReservationViewModel
             {
                 ClubId = id,
                 Address = club.Address,
                 Name = club.Name,
                 Town = club.Town.ToString(),
-
             };
 
             return this.View(viewModel);
@@ -65,8 +66,8 @@
         {
 
             var club = this.db.Clubs.Where(x => x.Id == id).FirstOrDefault();
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var player = this.db.Players.Where(x => x.UserId == userId).FirstOrDefault();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var player = this.db.Players.Where(x => x.UserId == user.Id).FirstOrDefault();
             var clubId = id;
 
             if (!this.ModelState.IsValid)
@@ -75,12 +76,10 @@
             }
 
             DateTime dateTime;
-            
             dateTime = this.dateTimeParseService.ConvertStrings(input.Date, input.Time);
-            
             try
             {
-                await this.reservationsService.CreateAsync(input, player.Id, dateTime, clubId);
+                await this.reservationsService.CreateAsync(input, user.Id, dateTime, clubId);
             }
             catch (Exception ex)
             {
@@ -90,7 +89,27 @@
 
             this.TempData["Message"] = "Reservation added successfully.";
 
-            return this.Redirect("/");
+            return this.Redirect("/Reservation/All");
         }
+        [HttpGet]
+        public IActionResult CancelReservation(int id)
+        {
+            var viewModel = this.reservationsService.GetById(id);
+
+            if (viewModel == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.reservationsService.DeleteAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
     }
 }

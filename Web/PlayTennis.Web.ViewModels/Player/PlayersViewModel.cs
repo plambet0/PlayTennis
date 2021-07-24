@@ -1,6 +1,4 @@
-﻿
-
-namespace PlayTennis.Web.ViewModels.Player
+﻿namespace PlayTennis.Web.ViewModels.Player
 {
     public class PlayersViewModel
     {

@@ -1,29 +1,23 @@
-﻿
-namespace PlayTennis.Web.ViewModels.Player
+﻿namespace PlayTennis.Web.ViewModels.Player
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Microsoft.AspNetCore.Http;
+    using PlayTennis.Common;
     using PlayTennis.Data.Models;
 
     public class PlayerInputModel
     {
-        
-
         [Required]
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.PlayerFirstNameMaxLenght)]
         public string FirstName { get; set; }
 
         [Required]
 
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.PlayerLastNameMaxLenght)]
         public string LastName { get; set; }
 
         public Gender Gender { get; set; }
 
-        [Range(1, 100)]
         public int Years { get; set; }
 
         [Display(Name = "Image URL")]
@@ -43,7 +37,8 @@ namespace PlayTennis.Web.ViewModels.Player
         public int PlayFrequencyInHoursPerWeek { get; set; }
 
         [Required]
-        [Phone]
+        [MaxLength(GlobalConstants.DataValidations.PhoneNumberMaxLenght)]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong phone number")]
         public string PhoneNumber { get; set; }
 
         [Required]

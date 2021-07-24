@@ -9,17 +9,17 @@
         <div class="col-lg-4 ml-lg-5">
             <div class="about_text_2">
                 <p>
-                    Oh, no! Nothing booked yet...
+                    Oh, no! Nothing reserved yet...
                 </p>
             </div>
             <div class="about_text_highlight">
-                Book an appointment in 3 easy steps:
+                Reserve court in 3 easy steps:
             </div>
             <div class="about_text_highlight">
                 <ol>
-                    <li>Find a salon.</li>
-                    <li>Choose a beauty service.</li>
-                    <li>Pick date and time.</li>
+                    <li>Find a club.</li>
+                    <li>Choose a date and time.</li>
+                    <li>Reserve it!</li>
                 </ol>
             </div>
             <div class="about_text_2">
@@ -33,7 +33,6 @@
         <div class="col-lg-4 ml-lg-5">
             <div class="button button-large button_1 elements_button mt-4">
                 <a asp-area="" asp-controller="Club" asp-action="All">
-                    <span>Find Clubs</span>
                     <span>Find Clubs</span>
                 </a>
             </div>
@@ -66,7 +65,7 @@
                     <td>@reservation.DateTime</td>
                     <td>
                         <a class="btn btn-outline-danger btn-sm"
-                           asp-area="" asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.Id">
+                           asp-area="" asp-controller="Reservation" asp-action="CancelReservation" asp-route-id="@reservation.Id">
                             Cancel
                         </a>
                     </td>

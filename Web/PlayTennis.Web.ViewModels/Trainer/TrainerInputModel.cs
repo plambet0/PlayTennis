@@ -2,24 +2,23 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    
 
+    using PlayTennis.Common;
     using PlayTennis.Data.Models;
 
     public class TrainerInputModel
     {
         [Required]
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.TrainerFirstNameMaxLenght)]
         public string FirstName { get; set; }
 
         [Required]
 
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.TrainerLastNameMaxLenght)]
         public string LastName { get; set; }
 
         public Gender Gender { get; set; }
 
-        [Range(1, 100)]
         public int Years { get; set; }
 
         [Display(Name = "Image URL")]
@@ -31,7 +30,8 @@
         public decimal PricePerHour { get; set; }
 
         [Required]
-        [Phone]
+        [MaxLength(GlobalConstants.DataValidations.PhoneNumberMaxLenght)]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong phone number")]
         public string PhoneNumber { get; set; }
 
         [Required]

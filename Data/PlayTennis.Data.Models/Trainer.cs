@@ -1,29 +1,28 @@
 ﻿namespace PlayTennis.Data.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using PlayTennis.Common;
     using PlayTennis.Data.Common.Models;
 
     public class Trainer : BaseModel<int>
     {
         public Trainer()
         {
-            this.Clubs = new HashSet<TrainerClub>();
+            this.Votes = new HashSet<TrainerVote>();
         }
-        
 
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.TrainerFirstNameMaxLenght)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(GlobalConstants.DataValidations.TrainerLastNameMaxLenght)]
         public string LastName { get; set; }
 
         [Required]
@@ -38,6 +37,7 @@
         public decimal PricePerHour { get; set; }
 
         [Required]
+        [MaxLength(GlobalConstants.DataValidations.PhoneNumberMaxLenght)]
         public string PhoneNumber { get; set; }
 
         [Required]
@@ -45,6 +45,6 @@
 
         public virtual Town Town { get; set; }
 
-        public virtual ICollection<TrainerClub> Clubs { get; set; }
+        public virtual ICollection<TrainerVote> Votes { get; set; }
     }
 }

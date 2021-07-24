@@ -69,5 +69,16 @@ namespace PlayTennis.Services.Data
 
             return true;
         }
+
+        public bool IsRegistered(string userId)
+        {
+            var trainer = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+            if (trainer == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\PlayTennis.Common\PlayTennis.Common.csproj" />
     <ProjectReference Include="..\PlayTennis.Data.Common\PlayTennis.Data.Common.csproj" />
   </ItemGroup>
   

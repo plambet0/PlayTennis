@@ -1,5 +1,4 @@
-﻿
-namespace PlayTennis.Web.ViewModels.Player
+﻿namespace PlayTennis.Web.ViewModels.Player
 {
     using System.Collections.Generic;
 

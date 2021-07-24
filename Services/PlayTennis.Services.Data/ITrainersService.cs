@@ -1,11 +1,10 @@
-﻿
-
-using PlayTennis.Web.ViewModels.Trainer;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using PlayTennis.Web.ViewModels.Trainer;
+
     public interface ITrainersService
     {
         Task CreateAsync(TrainerInputModel input, string userId);
@@ -13,5 +12,7 @@ namespace PlayTennis.Services.Data
         IEnumerable<TrainerViewModel> GetAll(int page, int itemsPerPage = 12);
 
         bool IsAPlayer(string userId);
+
+        bool IsRegistered(string userId);
     }
 }

@@ -55,24 +55,6 @@ namespace PlayTennis.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -184,8 +166,8 @@ namespace PlayTennis.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Courts = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -223,7 +205,7 @@ namespace PlayTennis.Data.Migrations
                     PreferredSurface = table.Column<int>(type: "int", nullable: false),
                     PlaySinceInYears = table.Column<int>(type: "int", nullable: false),
                     PlayFrequencyInHoursPerWeek = table.Column<int>(type: "int", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Town = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -254,7 +236,7 @@ namespace PlayTennis.Data.Migrations
                     Years = table.Column<int>(type: "int", nullable: false),
                     TrainerSinceInYears = table.Column<int>(type: "int", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Town = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -267,6 +249,35 @@ namespace PlayTennis.Data.Migrations
                         name: "FK_Trainers_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClubVotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClubId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Value = table.Column<byte>(type: "tinyint", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClubVotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClubVotes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ClubVotes_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -288,13 +299,13 @@ namespace PlayTennis.Data.Migrations
                         column: x => x.ClubId,
                         principalTable: "Clubs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PlayerClubs_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -304,46 +315,56 @@ namespace PlayTennis.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false),
-                    ClubId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ClubId = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Reservations_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Reservations_Clubs_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Clubs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reservations_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TrainerClubs",
+                name: "TrainerVotes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TrainerId = table.Column<int>(type: "int", nullable: false),
-                    ClubId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Value = table.Column<byte>(type: "tinyint", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainerClubs", x => x.Id);
+                    table.PrimaryKey("PK_TrainerVotes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TrainerClubs_Clubs_ClubId",
-                        column: x => x.ClubId,
-                        principalTable: "Clubs",
+                        name: "FK_TrainerVotes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TrainerClubs_Trainers_TrainerId",
+                        name: "FK_TrainerVotes_Trainers_TrainerId",
                         column: x => x.TrainerId,
                         principalTable: "Trainers",
                         principalColumn: "Id",
@@ -405,6 +426,16 @@ namespace PlayTennis.Data.Migrations
                 column: "AddedByUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClubVotes_ClubId",
+                table: "ClubVotes",
+                column: "ClubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClubVotes_UserId",
+                table: "ClubVotes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlayerClubs_ClubId",
                 table: "PlayerClubs",
                 column: "ClubId");
@@ -430,23 +461,23 @@ namespace PlayTennis.Data.Migrations
                 column: "PlayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settings_IsDeleted",
-                table: "Settings",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrainerClubs_ClubId",
-                table: "TrainerClubs",
-                column: "ClubId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrainerClubs_TrainerId",
-                table: "TrainerClubs",
-                column: "TrainerId");
+                name: "IX_Reservations_UserId",
+                table: "Reservations",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trainers_UserId",
                 table: "Trainers",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainerVotes_TrainerId",
+                table: "TrainerVotes",
+                column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainerVotes_UserId",
+                table: "TrainerVotes",
                 column: "UserId");
         }
 
@@ -468,25 +499,25 @@ namespace PlayTennis.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ClubVotes");
+
+            migrationBuilder.DropTable(
                 name: "PlayerClubs");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
 
             migrationBuilder.DropTable(
-                name: "Settings");
-
-            migrationBuilder.DropTable(
-                name: "TrainerClubs");
+                name: "TrainerVotes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Clubs");
 
             migrationBuilder.DropTable(
-                name: "Clubs");
+                name: "Players");
 
             migrationBuilder.DropTable(
                 name: "Trainers");

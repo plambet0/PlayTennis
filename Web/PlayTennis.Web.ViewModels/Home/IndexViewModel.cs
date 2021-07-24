@@ -1,10 +1,11 @@
-﻿using PlayTennis.Web.ViewModels.Player;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlayTennis.Web.ViewModels.Home
+﻿namespace PlayTennis.Web.ViewModels.Home
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using PlayTennis.Web.ViewModels.Player;
+
     public class IndexViewModel
     {
 

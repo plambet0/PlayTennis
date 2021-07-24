@@ -16,8 +16,6 @@
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IPlayersService playerService;
         private readonly UserManager<ApplicationUser> userManager;
-        
-
         public PlayerController(
             ApplicationDbContext applicationDbContext,
             IPlayersService playerService,
@@ -26,7 +24,6 @@
             this.applicationDbContext = applicationDbContext;
             this.playerService = playerService;
             this.userManager = userManager;
-            
         }
 
         public IActionResult Add()
@@ -37,17 +34,18 @@
         [HttpPost]
         public async Task<IActionResult> AddAsync(PlayerInputModel input)
         {
+            var user = await this.userManager.GetUserAsync(this.User);
+
             if (!this.ModelState.IsValid)
             {
               return this.View(input);
             }
 
-            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = await this.userManager.GetUserAsync(this.User);
-            if (this.playerService.IsATrainer(user.Id))
+            if (this.playerService.IsATrainer(user.Id) || this.playerService.IsRegistered(user.Id))
             {
                 return this.View("YouCannotRegisterAPlayer");
             }
+
             try
             {
                 await this.playerService.CreateAsync(input, user.Id);

@@ -1,8 +1,6 @@
 ﻿namespace PlayTennis.Services.Data
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -53,7 +51,6 @@
                  .Take(itemsPerPage)
                  .Select(x => new PlayersViewModel
                  {
-                      
                       FullName = x.FirstName + " " + x.LastName,
                       ImageUrl = x.ImageUrl,
                       Town = x.Town.ToString(),
@@ -67,19 +64,28 @@
         public PlayersViewModel GetById(string userId)
         {
             var player = this.playersRepository.All().Where(x => x.UserId == userId)
-                .Select(x=> new PlayersViewModel
+                .Select(x => new PlayersViewModel
                 {
                      Id = x.Id,
-                     
                 }).FirstOrDefault();
 
             return player;
-            
         }
 
         public bool IsATrainer(string userId)
         {
-            var player = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+            var trainer = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+            if (trainer == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsRegistered(string userId)
+        {
+            var player = this.playersRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
             if (player == null)
             {
                 return false;

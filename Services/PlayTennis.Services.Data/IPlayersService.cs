@@ -13,6 +13,10 @@
 
         bool IsATrainer(string userId);
 
+        bool IsRegistered(string userId);
+
         PlayersViewModel GetById(string userId);
+
+        
     }
 }

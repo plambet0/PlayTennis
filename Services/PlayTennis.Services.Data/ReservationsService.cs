@@ -1,14 +1,14 @@
-﻿using PlayTennis.Data.Common.Repositories;
-using PlayTennis.Data.Models;
-using PlayTennis.Web.ViewModels.Reservation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using PlayTennis.Data.Common.Repositories;
+    using PlayTennis.Data.Models;
+    using PlayTennis.Web.ViewModels.Reservation;
+
     public class ReservationsService : IReservationsService
     {
         private readonly IDateTimeParseService dateTimeParseService;
@@ -21,25 +21,29 @@ namespace PlayTennis.Services.Data
             this.reservationRepository = reservationRepository;
             this.playersService = playersService;
         }
-        
-        public async Task CreateAsync(ReservationViewModel input, int playerId, DateTime dateTime, int clubId)
+
+        public async Task CreateAsync(ReservationViewModel input, string userId, DateTime dateTime, int clubId)
         {
             var reservation = new Reservation
             {
-                PlayerId = playerId,
+                UserId = userId,
                 ClubId = clubId,
                 DateTime = dateTime,
-                 
             };
             await this.reservationRepository.AddAsync(reservation);
             await this.reservationRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var reservation = this.reservationRepository.All().FirstOrDefault(x => x.Id == id);
+            this.reservationRepository.Delete(reservation);
+            await this.reservationRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<ReservationListViewModel> GetAllById(string userId)
         {
-            var player = this.playersService.GetById(userId);
-            
-            var reservations = this.reservationRepository.All().Where(x => x.PlayerId == player.Id)
+             var reservations = this.reservationRepository.All().Where(x => x.UserId == userId)
                 .Select(x => new ReservationListViewModel
                 {
                     Id = x.Id,
@@ -47,13 +51,27 @@ namespace PlayTennis.Services.Data
                     ClubCityName = x.Club.Town.ToString(),
                     ClubName = x.Club.Name,
                     DateTime = x.DateTime,
-                    UserEmail = x.Player.Email,
                     ClubId = x.ClubId,
-
-
                 }).ToList();
-                
-            return reservations;
+
+             return reservations;
+        }
+
+        public ReservationListViewModel GetById(int id)
+        {
+            var reservation = this.reservationRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new ReservationListViewModel
+                {
+                    Id = id,
+                    ClubAddress = x.Club.Address,
+                    ClubCityName = x.Club.Name,
+                    ClubId = x.ClubId,
+                    ClubName = x.Club.Name,
+                    DateTime = x.DateTime,
+                }).FirstOrDefault();
+
+            return reservation;
         }
     }
 }

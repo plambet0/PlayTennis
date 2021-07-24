@@ -1,21 +1,23 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using PlayTennis.Data.Models;
-
-namespace PlayTennis.Web.ViewModels.Club
+﻿namespace PlayTennis.Web.ViewModels.Club
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using PlayTennis.Common;
+    using PlayTennis.Data.Models;
+
     public class ClubInputModel
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(GlobalConstants.DataValidations.ClubNameMaxLenght)]
         [Display(Name = "The Name of the Club")]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(GlobalConstants.DataValidations.ClubAddressMaxLenght)]
         public string Address { get; set; }
 
         [Required]
-        [Range(1,12)]
         [Display(Name = "Number of courts for play")]
         public int Courts { get; set; }
 

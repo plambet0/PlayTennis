@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlayTennis.Web.ViewModels.Reservation
+﻿namespace PlayTennis.Web.ViewModels.Reservation
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class ReservationListViewModel
     {
         public int Id { get; set; }
 
         public DateTime DateTime { get; set; }
-
-        public string UserEmail { get; set; }
 
         public int ClubId { get; set; }
 

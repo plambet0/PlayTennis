@@ -13,9 +13,21 @@
                 <div class="info_text">Number Of Courts: <strong>@Model.Courts</strong></div>
                 <div class="info_text">Price: <strong>@Model.PricePerHour lv./hour</strong></div>
                 <div class="info_text">Surface: <strong>@Model.Surface</strong></div>
-                <div class="button info_button">
-                    <a asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id" class="btn btn-primary">Add To Favorites</a>
-                    <a asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id" class="btn btn-primary">RESERVE COURT</a>
+                <div class="col-6 mt-5 ml-5">
+                    <div class="row ml-5">
+                        <form method="post">
+                            <button type="submit" class="btn btn-outline-success"
+                                    asp-area="" asp-controller="Club" asp-action="AddToFavorites" asp-route-id="@Model.Id">
+                                Add To Favorites
+                            </button>
+                        </form>
+                        <div class="ml-5">
+                            <a class="btn btn-outline-success" asp-area="" asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id">Make A Reservation</a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            </div>
         </div>
     </div>
+</div>

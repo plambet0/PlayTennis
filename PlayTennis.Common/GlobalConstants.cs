@@ -14,5 +14,22 @@
 
             public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
         }
+
+        public static class DataValidations
+        {
+            public const int ClubNameMaxLenght = 20;
+
+            public const int ClubAddressMaxLenght = 30;
+
+            public const int PlayerFirstNameMaxLenght = 10;
+
+            public const int PlayerLastNameMaxLenght = 10;
+
+            public const int TrainerFirstNameMaxLenght = 10;
+
+            public const int TrainerLastNameMaxLenght = 10;
+
+            public const int PhoneNumberMaxLenght = 10;
+        }
     }
 }

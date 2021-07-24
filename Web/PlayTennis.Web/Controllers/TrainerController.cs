@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using PlayTennis.Data.Models;
-using PlayTennis.Services.Data;
-using PlayTennis.Web.ViewModels.Trainer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Web.Controllers
+﻿namespace PlayTennis.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using PlayTennis.Data.Models;
+    using PlayTennis.Services.Data;
+    using PlayTennis.Web.ViewModels.Trainer;
+
     public class TrainerController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -20,7 +19,7 @@ namespace PlayTennis.Web.Controllers
             this.userManager = userManager;
             this.trainersService = trainersService;
         }
-        
+
         public IActionResult Add()
         {
             return this.View();
@@ -33,13 +32,14 @@ namespace PlayTennis.Web.Controllers
             {
                 return this.View(input);
             }
-            
+
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
-            if (this.trainersService.IsAPlayer(user.Id))
+            if (this.trainersService.IsAPlayer(user.Id) || this.trainersService.IsRegistered(user.Id))
             {
                 return this.View("YouCannotRegisterATrainer");
             }
+
             try
             {
                 await this.trainersService.CreateAsync(input, user.Id);

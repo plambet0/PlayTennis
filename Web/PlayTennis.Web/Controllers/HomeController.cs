@@ -15,11 +15,9 @@
         {
             this.homePageCountsService = homePageCountsService;
         }
-        
-        
+
         public IActionResult Index()
         {
-            
             var counts = this.homePageCountsService.GetCounts();
 
             var viewModel = new IndexViewModel
@@ -43,7 +41,5 @@
             return this.View(
                 new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
-
-      
     }
 }

@@ -2,17 +2,15 @@
 {
     using System;
 
-    using PlayTennis.Data.Common.Models;
-
     public class Reservation
     {
         public int Id { get; set; }
 
         public DateTime DateTime { get; set; }
 
-        public int PlayerId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual Player Player { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public int ClubId { get; set; }
 

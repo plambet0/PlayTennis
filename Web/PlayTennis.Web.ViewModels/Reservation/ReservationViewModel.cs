@@ -1,11 +1,9 @@
-﻿
-namespace PlayTennis.Web.ViewModels.Reservation
+﻿namespace PlayTennis.Web.ViewModels.Reservation
 {
     using System.ComponentModel.DataAnnotations;
 
     public class ReservationViewModel
     {
-        [Required]
         public int ClubId { get; set; }
 
         public string Name { get; set; }
@@ -14,14 +12,8 @@ namespace PlayTennis.Web.ViewModels.Reservation
 
         public string Town { get; set; }
 
-        [Required]
-       
         public string Date { get; set; }
 
-        [Required]
-       
         public string Time { get; set; }
-
-        
     }
 }

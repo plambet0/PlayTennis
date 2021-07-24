@@ -1,29 +1,32 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using PlayTennis.Data;
-using PlayTennis.Data.Models;
-using PlayTennis.Services.Data;
-using PlayTennis.Web.ViewModels.Club;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Web.Controllers
+﻿namespace PlayTennis.Web.Controllers
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using PlayTennis.Data;
+    using PlayTennis.Data.Models;
+    using PlayTennis.Services.Data;
+    using PlayTennis.Web.ViewModels.Club;
+
     public class ClubController : Controller
     {
         private readonly IClubsService clubsService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext applicationDbContext;
 
-        public ClubController(IClubsService clubsService, UserManager<ApplicationUser> userManager, ApplicationDbContext applicationDbContext)
+        public ClubController(
+            IClubsService clubsService,
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext applicationDbContext)
         {
             this.clubsService = clubsService;
             this.userManager = userManager;
             this.applicationDbContext = applicationDbContext;
         }
-        
+
         public IActionResult Add()
         {
             return this.View();
@@ -36,6 +39,7 @@ namespace PlayTennis.Web.Controllers
             {
                 return this.View(input);
             }
+
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
             try
@@ -67,7 +71,6 @@ namespace PlayTennis.Web.Controllers
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Clubs = clubs,
-                 
             };
             return this.View(viewModel);
         }
@@ -76,6 +79,26 @@ namespace PlayTennis.Web.Controllers
         {
             var club = this.clubsService.GetById(id);
             return this.View(club);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddToFavorites(int id)
+        {
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.clubsService.AddToFavoritesAsync(id, user.Id);
+            return this.Redirect("/Club/MyFavoriteClubs");
+        }
+
+        public ActionResult MyfavoriteClubs()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var clubs = this.clubsService.GetAllById(userId);
+            var viewModel = new AllClubsViewModel
+            {
+                Clubs = clubs,
+            };
+            return this.View(viewModel);
         }
     }
 }
