@@ -11,10 +11,8 @@
 
         IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12);
 
-        IEnumerable<ClubsViewModel> GetAllById(string userId);
+      
 
         ClubsViewModel GetById(int id);
-
-        Task AddToFavoritesAsync(int id, string userId);
     }
 }

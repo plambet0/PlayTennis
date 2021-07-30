@@ -35,7 +35,7 @@
 
         public DbSet<ClubVote> ClubVotes { get; set; }
 
-        public DbSet<PlayerClubs> PlayerClubs { get; set; }
+        public DbSet<UserClub> UserClubs { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -76,6 +76,7 @@
                 method.Invoke(null, new object[] { builder });
             }
 
+
             // Disable cascade delete
             var foreignKeys = entityTypes
                 .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
@@ -83,6 +84,18 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            builder.Entity<UserClub>().HasKey(uc => new { uc.UserId, uc.ClubId });
+
+            builder.Entity<UserClub>()
+            .HasOne<Club>(c => c.Club)
+            .WithMany(c => c.UserClubs)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserClub>()
+            .HasOne<ApplicationUser>(u => u.User)
+            .WithMany(u => u.FavoriteClubs)
+            .OnDelete(DeleteBehavior.Cascade); 
+
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

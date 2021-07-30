@@ -1,7 +1,7 @@
 ﻿namespace PlayTennis.Web.Controllers
 {
     using System;
-
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
@@ -9,6 +9,7 @@
     using PlayTennis.Data;
     using PlayTennis.Data.Models;
     using PlayTennis.Services.Data;
+    using PlayTennis.Web.ViewModels.Club;
     using PlayTennis.Web.ViewModels.Player;
 
     public class PlayerController : Controller
@@ -83,5 +84,40 @@
         {
             return this.View();
         }
+        [HttpPost]
+        public async Task<ActionResult> AddToFavorites(int clubId)
+        {
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.playerService.AddToFavoritesAsync(clubId, user.Id);
+            return this.Redirect("/Player/MyFavoriteClubs");
+        }
+        public ActionResult MyfavoriteClubs(int id = 1)
+        {
+            
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            const int itemsPerPage = 12;
+            var clubs = this.playerService.GetAllFavorites(userId, 1, itemsPerPage);
+            var viewModel = new AllClubsViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                Clubs = clubs,
+            };
+            return this.View(viewModel);
+        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteFromFavorites(int clubId)
+        {
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.playerService.DeleteFromFavoritesAsync(clubId, user.Id);
+            return this.Redirect("/Player/MyFavoriteClubs");
+        }
+
     }
 }

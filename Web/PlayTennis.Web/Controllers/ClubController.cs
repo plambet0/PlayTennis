@@ -81,24 +81,7 @@
             return this.View(club);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddToFavorites(int id)
-        {
-
-            var user = await this.userManager.GetUserAsync(this.User);
-            await this.clubsService.AddToFavoritesAsync(id, user.Id);
-            return this.Redirect("/Club/MyFavoriteClubs");
-        }
-
-        public ActionResult MyfavoriteClubs()
-        {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var clubs = this.clubsService.GetAllById(userId);
-            var viewModel = new AllClubsViewModel
-            {
-                Clubs = clubs,
-            };
-            return this.View(viewModel);
-        }
+       
+        
     }
 }

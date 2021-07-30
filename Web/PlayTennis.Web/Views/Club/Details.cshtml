@@ -17,13 +17,19 @@
                     <div class="row ml-5">
                         <form method="post">
                             <button type="submit" class="btn btn-outline-success"
-                                    asp-area="" asp-controller="Club" asp-action="AddToFavorites" asp-route-id="@Model.Id">
+                                    asp-area="" asp-controller="Player" asp-action="AddToFavorites" asp-route-clubId="@Model.Id">
                                 Add To Favorites
                             </button>
                         </form>
                         <div class="ml-5">
                             <a class="btn btn-outline-success" asp-area="" asp-controller="Reservation" asp-action="MakeAReservation" asp-route-id="@Model.Id">Make A Reservation</a>
                         </div>
+                        <form method="post">
+                            <button type="submit" class="btn btn-outline-success"
+                                    asp-area="" asp-controller="Player" asp-action="DeleteFromFavorites" asp-route-clubId="@Model.Id">
+                                Delete From Favorites
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

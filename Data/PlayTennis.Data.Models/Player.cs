@@ -9,8 +9,7 @@
     public class Player : BaseModel<int>
     {
         public Player()
-        {
-            this.FavoriteClubs = new HashSet<PlayerClubs>();
+        { 
             this.Reservations = new HashSet<Reservation>();
         }
 
@@ -53,7 +52,5 @@
         public virtual Town Town { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
-
-        public virtual ICollection<PlayerClubs> FavoriteClubs { get; set; }
     }
 }

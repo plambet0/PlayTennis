@@ -283,29 +283,27 @@ namespace PlayTennis.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlayerClubs",
+                name: "UserClubs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClubId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlayerClubs", x => x.Id);
+                    table.PrimaryKey("PK_UserClubs", x => new { x.UserId, x.ClubId });
                     table.ForeignKey(
-                        name: "FK_PlayerClubs_Clubs_ClubId",
+                        name: "FK_UserClubs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserClubs_Clubs_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Clubs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PlayerClubs_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -436,16 +434,6 @@ namespace PlayTennis.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlayerClubs_ClubId",
-                table: "PlayerClubs",
-                column: "ClubId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlayerClubs_PlayerId",
-                table: "PlayerClubs",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Players_UserId",
                 table: "Players",
                 column: "UserId");
@@ -479,6 +467,11 @@ namespace PlayTennis.Data.Migrations
                 name: "IX_TrainerVotes_UserId",
                 table: "TrainerVotes",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClubs_ClubId",
+                table: "UserClubs",
+                column: "ClubId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -502,25 +495,25 @@ namespace PlayTennis.Data.Migrations
                 name: "ClubVotes");
 
             migrationBuilder.DropTable(
-                name: "PlayerClubs");
-
-            migrationBuilder.DropTable(
                 name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "TrainerVotes");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "UserClubs");
 
             migrationBuilder.DropTable(
-                name: "Clubs");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Players");
 
             migrationBuilder.DropTable(
                 name: "Trainers");
+
+            migrationBuilder.DropTable(
+                name: "Clubs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using PlayTennis.Web.ViewModels.Club;
     using PlayTennis.Web.ViewModels.Player;
 
     public interface IPlayersService
@@ -17,6 +17,10 @@
 
         PlayersViewModel GetById(string userId);
 
-        
+        Task AddToFavoritesAsync(int clubId, string userId);
+
+        IEnumerable<ClubsViewModel> GetAllFavorites( string userId, int page, int itemsPerPage = 12);
+
+        Task DeleteFromFavoritesAsync(int clubId, string userId);
     }
 }

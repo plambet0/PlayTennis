@@ -12,7 +12,7 @@
         {
             this.Reservations = new HashSet<Reservation>();
             this.Votes = new HashSet<ClubVote>();
-            this.PlayersClubs = new HashSet<PlayerClubs>();
+            this.UserClubs = new HashSet<UserClub>();
         }
 
         [Required]
@@ -40,7 +40,7 @@
 
         public virtual ICollection<Reservation> Reservations { get; set; }
 
-        public virtual ICollection<PlayerClubs> PlayersClubs { get; set; }
+        public virtual ICollection<UserClub> UserClubs { get; set; }
 
         public virtual ICollection<ClubVote> Votes { get; set; }
     }
