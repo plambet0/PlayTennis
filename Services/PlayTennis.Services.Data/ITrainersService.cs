@@ -15,6 +15,6 @@
 
         bool IsRegistered(string userId);
 
-        TrainerInputModel GetById(int id);
+        TrainerDetailsViewModel GetById(int id);
     }
 }

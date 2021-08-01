@@ -60,10 +60,11 @@ namespace PlayTennis.Services.Data
             return trainers;
         }
 
-        public TrainerInputModel GetById(int id)
+        public TrainerDetailsViewModel GetById(int id)
         {
-            var trainer = this.trainerRepository.All().Where(x => x.Id == id).Select(x => new TrainerInputModel
+            var trainer = this.trainerRepository.All().Where(x => x.Id == id).Select(x => new TrainerDetailsViewModel
             {
+                 
                  FirstName = x.FirstName,
                  LastName = x.LastName,
                  Email = x.Email,
@@ -74,7 +75,8 @@ namespace PlayTennis.Services.Data
                  PhoneNumber = x.PhoneNumber,
                  PricePerHour = x.PricePerHour,
                  Town = x.Town,
-                 
+                 TrainerVoteAverageValue = x.Votes.Count() == 0 ? 0 : x.Votes.Average(v => v.Value),
+                 Id = x.Id,
                 
             }).FirstOrDefault();
 

@@ -16,6 +16,8 @@ namespace PlayTennis.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.FavoriteClubs = new HashSet<UserClub>();
+            this.ClubVotes = new HashSet<ClubVote>();
+            this.TrainerVotes = new HashSet<TrainerVote>();
         }
 
         // Audit info
@@ -35,5 +37,9 @@ namespace PlayTennis.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<UserClub> FavoriteClubs { get; set; }
+
+        public virtual ICollection<TrainerVote> TrainerVotes { get; set; }
+
+        public virtual ICollection<ClubVote> ClubVotes { get; set; }
     }
 }
