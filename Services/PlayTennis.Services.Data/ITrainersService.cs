@@ -14,5 +14,7 @@
         bool IsAPlayer(string userId);
 
         bool IsRegistered(string userId);
+
+        TrainerInputModel GetById(int id);
     }
 }

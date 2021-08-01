@@ -11,7 +11,10 @@
     <div id="slider">
         <img src="~/780473.jpg" width="1000" height="350" class="embed-responsive">
         <h2>Reserve court, find players, play tennis now!</h2>
-        <a asp-controller="Club" asp-action="All" class="btn btn-primary btn-lg">FIND FREE COURT NOW!</a>
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Club" asp-action="All" class="btn btn-primary btn-lg">FIND FREE COURT NOW!</a>
+        }
     </div>
 
     <div class="jumbotron">

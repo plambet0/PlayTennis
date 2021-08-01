@@ -15,7 +15,7 @@
 
         bool IsRegistered(string userId);
 
-        PlayersViewModel GetById(string userId);
+        PlayerInputModel GetById(int id);
 
         Task AddToFavoritesAsync(int clubId, string userId);
 

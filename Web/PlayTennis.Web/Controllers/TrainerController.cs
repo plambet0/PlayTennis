@@ -52,7 +52,7 @@
 
             this.TempData["Message"] = "Trainer added successfully.";
 
-            return this.Redirect("/");
+            return this.Redirect("/Trainer/All");
         }
 
         public IActionResult All(int id = 1)
@@ -71,6 +71,11 @@
                 Trainers = trainers,
             };
             return this.View(viewModel);
+        }
+        public ActionResult Details(int id)
+        {
+            var trainer = this.trainersService.GetById(id);
+            return this.View(trainer);
         }
     }
 }

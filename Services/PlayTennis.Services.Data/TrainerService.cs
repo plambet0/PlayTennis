@@ -54,9 +54,31 @@ namespace PlayTennis.Services.Data
                      Town = x.Town.ToString(),
                      PricePerHour = x.PricePerHour,
                      PhoneNumber = x.PhoneNumber,
+                     Id = x.Id,
                  })
                  .ToList();
             return trainers;
+        }
+
+        public TrainerInputModel GetById(int id)
+        {
+            var trainer = this.trainerRepository.All().Where(x => x.Id == id).Select(x => new TrainerInputModel
+            {
+                 FirstName = x.FirstName,
+                 LastName = x.LastName,
+                 Email = x.Email,
+                 Gender = x.Gender,
+                 TrainerSinceInYears = x.TrainerSinceInYears,
+                 Years = x.Years,
+                 ImageUrl = x.ImageUrl,
+                 PhoneNumber = x.PhoneNumber,
+                 PricePerHour = x.PricePerHour,
+                 Town = x.Town,
+                 
+                
+            }).FirstOrDefault();
+
+            return trainer;
         }
 
         public bool IsAPlayer(string userId)

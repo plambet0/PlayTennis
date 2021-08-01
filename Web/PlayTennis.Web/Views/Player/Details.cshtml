@@ -1,0 +1,23 @@
+﻿@model PlayerInputModel;
+@{ this.ViewData["Title"] = "Player: " + @Model.FirstName + " " + @Model.LastName; }
+
+<div class="row row-eq-height">
+    <!-- Info Box -->
+    <div class="col-lg-4 info_box_col">
+        <div class="info_box">
+            <div class="info_image"><img src="@Model.ImageUrl" alt=""></div>
+            <div class="info_content">
+                <div class="info_title">@Model.FirstName @Model.LastName</div>
+                <div class="info_text">Town: <strong>@Model.Town</strong></div>
+                <div class="info_text">Player Since: <strong>@Model.PlaySinceInYears years</strong></div>
+                <div class="info_text">Hours on court per week: <strong>@Model.PlayFrequencyInHoursPerWeek hours</strong></div>
+                <div class="info_text">Favorite Surface: <strong>@Model.PreferredSurface</strong></div>
+                <div class="info_text">Phone Number: <strong>@Model.PhoneNumber</strong></div>
+                <div class="info_text">Email: <strong>@Model.Email</strong></div>
+                <div class="info_text">Age: <strong>@Model.Years years old</strong></div>
+                <div class="col-6 mt-5 ml-5">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

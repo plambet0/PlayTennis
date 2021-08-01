@@ -15,6 +15,7 @@
                     <h5 class="card-title text-center">@trainer.Town</h5>
                     <h5 class="card-title text-center">@trainer.PricePerHour lv./hour</h5>
                     <h5 class="card-title text-center">PhoneNumber: @trainer.PhoneNumber</h5>
+                    <a asp-controller="Trainer" asp-action="Details" asp-route-id="@trainer.Id" class="btn btn-primary">VIEW INFO</a>
                 </div>
             </div>
         </div>

@@ -80,9 +80,10 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int playerId)
+        public ActionResult Details(int id)
         {
-            return this.View();
+            var trainer = this.playerService.GetById(id);
+            return this.View(trainer);
         }
         [HttpPost]
         public async Task<ActionResult> AddToFavorites(int clubId)

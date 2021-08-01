@@ -122,12 +122,25 @@
             }).ToList();
         }
 
-        public PlayersViewModel GetById(string userId)
+        public PlayerInputModel GetById(int id)
         {
-            var player = this.playersRepository.All().Where(x => x.UserId == userId)
-                .Select(x => new PlayersViewModel
+            var player = this.playersRepository.All().Where(x => x.Id == id)
+                .Select(x => new PlayerInputModel
                 {
-                     Id = x.Id,
+                     FirstName = x.FirstName,
+                     LastName = x.LastName,
+                     Gender = x.Gender,
+                     Email = x.Email,
+                     BackHand = x.BackHand,
+                     PhoneNumber = x.PhoneNumber,
+                     Hand = x.Hand,
+                     ImageUrl = x.ImageUrl,
+                     PlayFrequencyInHoursPerWeek = x.PlayFrequencyInHoursPerWeek,
+                     PlaySinceInYears = x.PlaySinceInYears,
+                     PreferredSurface = x.PreferredSurface,
+                     Town = x.Town,
+                     Years = x.Years,
+
                 }).FirstOrDefault();
 
             return player;

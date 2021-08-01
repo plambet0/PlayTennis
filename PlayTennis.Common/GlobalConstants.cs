@@ -17,7 +17,7 @@
 
         public static class DataValidations
         {
-            public const int ClubNameMaxLenght = 20;
+            public const int ClubNameMaxLenght = 30;
 
             public const int ClubAddressMaxLenght = 30;
 
