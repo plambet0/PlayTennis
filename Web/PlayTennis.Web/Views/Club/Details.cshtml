@@ -1,6 +1,29 @@
-﻿@model ClubsViewModel;
+﻿@model ClubDetailsViewModel;
 @{ this.ViewData["Title"] = "Club: " + Model.Name; }
 
+<div class="row mb-4">
+    <div class="col-xl-9 col-12">
+        <ul class="entry-meta">
+
+            <li class="single-meta">
+                <i class="fas fa-user"></i>  Rate:
+                @Model.Name
+            </li>
+
+            <li class="single-meta">
+                <ul class="item-rating">
+                    <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+                    <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+                    <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+                    <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+                    <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+                    <li><span id="averageVoteValue">@Model.ClubVoteAverageValue.ToString("0.0")</span><span> / 5</span> </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
 <div class="row row-eq-height">
     <!-- Info Box -->
     <div class="col-lg-4 info_box_col">
@@ -33,7 +56,33 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
 </div>
+
+
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var clubId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { clubId: clubId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/ClubsVote",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+}

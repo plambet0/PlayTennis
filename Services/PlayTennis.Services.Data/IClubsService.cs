@@ -11,6 +11,6 @@
 
         IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12);
 
-        ClubsViewModel GetById(int id);
+        ClubDetailsViewModel GetById(int id);
     }
 }

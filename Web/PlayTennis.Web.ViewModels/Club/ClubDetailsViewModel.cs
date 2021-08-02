@@ -4,16 +4,8 @@ using System.Text;
 
 namespace PlayTennis.Web.ViewModels.Club
 {
-    public class ClubDetailsViewModel
+    public class ClubDetailsViewModel : ClubsViewModel
     {
-        public string Clubid { get; set; }
-
-        public string Name { get; set; }
-
-        public string Town { get; set; }
-
-        public string Address { get; set; }
-
-        
+        public double ClubVoteAverageValue { get; set; }
     }
 }

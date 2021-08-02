@@ -80,8 +80,5 @@
             var club = this.clubsService.GetById(id);
             return this.View(club);
         }
-
-       
-        
     }
 }

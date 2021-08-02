@@ -76,6 +76,7 @@
             services.AddTransient<IReservationsService, ReservationsService>();
             services.AddTransient<IDateTimeParseService, DateTimeParseService>();
             services.AddTransient<ITrainerVoteService, TrainerVoteService>();
+            services.AddTransient<IClubVoteService, ClubVoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

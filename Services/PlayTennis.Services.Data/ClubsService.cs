@@ -58,11 +58,10 @@
                  .ToList();
             return clubs;
         }
-        public ClubsViewModel GetById(int id)
+        public ClubDetailsViewModel GetById(int id)
         {
-            var club = this.clubRepository.All().Where(x => x.Id == id).Select(x => new ClubsViewModel
+            var club = this.clubRepository.All().Where(x => x.Id == id).Select(x => new ClubDetailsViewModel
             {
-                Id = x.Id,
                 Address = x.Address,
                 ImageUrl = x.ImageUrl,
                 Courts = x.Courts,
@@ -70,6 +69,8 @@
                 PricePerHour = x.PricePerHour,
                 Surface = x.Surface.ToString(),
                 Town = x.Town.ToString(),
+                ClubVoteAverageValue = x.Votes.Count() == 0 ? 0 : x.Votes.Average(v => v.Value),
+                Id = x.Id,
             }).FirstOrDefault();
 
             return club;

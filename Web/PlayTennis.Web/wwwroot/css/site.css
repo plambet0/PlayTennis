@@ -233,3 +233,18 @@ body {
     color: #404040;
     margin-top: 28px;
 }
+.buttons {
+}
+
+.buttons_content {
+    margin-top: 100px;
+}
+
+.elements_button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+    .elements_button:not(:last-child) {
+        margin-right: 46px;
+    }
