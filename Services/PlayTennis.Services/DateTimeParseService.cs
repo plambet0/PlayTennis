@@ -1,11 +1,10 @@
-﻿using PlayTennis.Common;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace PlayTennis.Services
+﻿namespace PlayTennis.Services
 {
+    using System;
+    using System.Globalization;
+
+    using PlayTennis.Common;
+
     public class DateTimeParseService : IDateTimeParseService
     {
         public DateTime ConvertStrings(string date, string time)

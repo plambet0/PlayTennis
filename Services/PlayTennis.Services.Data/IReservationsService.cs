@@ -15,7 +15,5 @@
         ReservationListViewModel GetById(int id);
 
         Task DeleteAsync(int id);
-
-
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
     using System.Linq;
 

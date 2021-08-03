@@ -4,6 +4,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data;
@@ -17,6 +18,7 @@
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IPlayersService playerService;
         private readonly UserManager<ApplicationUser> userManager;
+
         public PlayerController(
             ApplicationDbContext applicationDbContext,
             IPlayersService playerService,
@@ -27,12 +29,14 @@
             this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddAsync(PlayerInputModel input)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -62,6 +66,7 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        [Authorize]
         public IActionResult All(int id = 1)
         {
             if (id <= 0)
@@ -80,26 +85,30 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var trainer = this.playerService.GetById(id);
             return this.View(trainer);
         }
+
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddToFavorites(int clubId)
         {
-
             var user = await this.userManager.GetUserAsync(this.User);
             await this.playerService.AddToFavoritesAsync(clubId, user.Id);
             return this.Redirect("/Player/MyFavoriteClubs");
         }
+
+        [Authorize]
         public ActionResult MyfavoriteClubs(int id = 1)
         {
-            
             if (id <= 0)
             {
                 return this.NotFound();
             }
+
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             const int itemsPerPage = 12;
             var clubs = this.playerService.GetAllFavorites(userId, 1, itemsPerPage);
@@ -111,7 +120,9 @@
             };
             return this.View(viewModel);
         }
+
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> DeleteFromFavorites(int clubId)
         {
 
@@ -119,6 +130,5 @@
             await this.playerService.DeleteFromFavoritesAsync(clubId, user.Id);
             return this.Redirect("/Player/MyFavoriteClubs");
         }
-
     }
 }

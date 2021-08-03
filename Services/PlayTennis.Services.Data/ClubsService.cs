@@ -58,6 +58,7 @@
                  .ToList();
             return clubs;
         }
+
         public ClubDetailsViewModel GetById(int id)
         {
             var club = this.clubRepository.All().Where(x => x.Id == id).Select(x => new ClubDetailsViewModel

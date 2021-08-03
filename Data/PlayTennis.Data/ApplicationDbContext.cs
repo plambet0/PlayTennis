@@ -76,7 +76,6 @@
                 method.Invoke(null, new object[] { builder });
             }
 
-
             // Disable cascade delete
             var foreignKeys = entityTypes
                 .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
@@ -84,6 +83,7 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
             builder.Entity<UserClub>().HasKey(uc => new { uc.UserId, uc.ClubId });
 
             builder.Entity<UserClub>()

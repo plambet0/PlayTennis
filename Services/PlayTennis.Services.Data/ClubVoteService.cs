@@ -1,13 +1,11 @@
-﻿using PlayTennis.Data.Common.Repositories;
-using PlayTennis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using PlayTennis.Data.Common.Repositories;
+    using PlayTennis.Data.Models;
+
     public class ClubVoteService : IClubVoteService
     {
         private readonly IRepository<ClubVote> votesRepository;

@@ -5,6 +5,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data;
@@ -35,6 +36,7 @@
             this.playersService = playersService;
         }
 
+        [Authorize]
         public IActionResult All()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -46,6 +48,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public IActionResult MakeAReservation(int id)
         {
             var club = this.db.Clubs.Where(x => x.Id == id).FirstOrDefault();
@@ -62,6 +65,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> MakeAReservation(ReservationViewModel input, int id)
         {
 
@@ -91,6 +95,7 @@
 
             return this.Redirect("/Reservation/All");
         }
+
         [HttpGet]
         public IActionResult CancelReservation(int id)
         {
@@ -110,6 +115,5 @@
             await this.reservationsService.DeleteAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }
-
     }
 }

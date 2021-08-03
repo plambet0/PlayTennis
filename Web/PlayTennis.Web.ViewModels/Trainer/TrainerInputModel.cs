@@ -1,6 +1,5 @@
 ﻿namespace PlayTennis.Web.ViewModels.Trainer
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     using PlayTennis.Common;

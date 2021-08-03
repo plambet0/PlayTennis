@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data.Models;
@@ -20,6 +21,7 @@
             this.trainersService = trainersService;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return this.View();
@@ -72,6 +74,7 @@
             };
             return this.View(viewModel);
         }
+
         public ActionResult Details(int id)
         {
             var trainer = this.trainersService.GetById(id);

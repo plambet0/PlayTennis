@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace PlayTennis.Web.ViewModels
+﻿namespace PlayTennis.Web.ViewModels
 {
+    using System;
+
     public class PagingViewModel
     {
         public int PageNumber { get; set; }
@@ -14,11 +14,9 @@ namespace PlayTennis.Web.ViewModels
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int PagesCount => (int)Math.Ceiling((double)this.JobsCount / this.ItemsPerPage);
+        public int PagesCount => (int)Math.Ceiling((double)this.ItemsCount / this.ItemsPerPage);
 
-        public int JobsCount { get; set; }
-
-        public int WorkersCount { get; set; }
+        public int ItemsCount { get; set; }
 
         public int ItemsPerPage { get; set; }
     }

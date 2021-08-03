@@ -19,7 +19,7 @@ namespace PlayTennis.Services.Data
             this.trainerRepository = trainerRepository;
             this.playerRepository = playerRepository;
         }
-        
+
         public async Task CreateAsync(TrainerInputModel input, string userId)
         {
             var trainer = new Trainer
@@ -64,7 +64,6 @@ namespace PlayTennis.Services.Data
         {
             var trainer = this.trainerRepository.All().Where(x => x.Id == id).Select(x => new TrainerDetailsViewModel
             {
-                 
                  FirstName = x.FirstName,
                  LastName = x.LastName,
                  Email = x.Email,
@@ -77,7 +76,6 @@ namespace PlayTennis.Services.Data
                  Town = x.Town,
                  TrainerVoteAverageValue = x.Votes.Count() == 0 ? 0 : x.Votes.Average(v => v.Value),
                  Id = x.Id,
-                
             }).FirstOrDefault();
 
             return trainer;

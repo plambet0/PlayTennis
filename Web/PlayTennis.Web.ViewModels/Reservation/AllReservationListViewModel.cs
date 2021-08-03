@@ -1,8 +1,7 @@
-﻿
-using System.Collections.Generic;
-
-namespace PlayTennis.Web.ViewModels.Reservation
+﻿namespace PlayTennis.Web.ViewModels.Reservation
 {
+    using System.Collections.Generic;
+
     public class AllReservationListViewModel
     {
         public IEnumerable<ReservationListViewModel> Reservations { get; set; }

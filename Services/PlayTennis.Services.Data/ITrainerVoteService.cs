@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System.Threading.Tasks;
+
     public interface ITrainerVoteService
     {
         Task SetVoteAsync(int trainerId, string userId, byte value);

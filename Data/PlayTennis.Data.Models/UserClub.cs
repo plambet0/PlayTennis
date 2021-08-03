@@ -1,6 +1,4 @@
-﻿
-
-namespace PlayTennis.Data.Models
+﻿namespace PlayTennis.Data.Models
 {
     public class UserClub
     {

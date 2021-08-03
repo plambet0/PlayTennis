@@ -1,7 +1,5 @@
 ﻿namespace PlayTennis.Web.ViewModels.Reservation
 {
-    using System.ComponentModel.DataAnnotations;
-
     public class ReservationViewModel
     {
         public int ClubId { get; set; }

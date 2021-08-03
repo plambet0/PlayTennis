@@ -1,9 +1,9 @@
 ﻿namespace PlayTennis.Web.Controllers
 {
     using System;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PlayTennis.Data;
@@ -27,12 +27,14 @@
             this.applicationDbContext = applicationDbContext;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddAsync(ClubInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -57,6 +59,7 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        [Authorize]
         public IActionResult All(int id = 1)
         {
             if (id <= 0)
@@ -75,6 +78,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             var club = this.clubsService.GetById(id);

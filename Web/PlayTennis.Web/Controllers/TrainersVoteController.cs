@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using PlayTennis.Services.Data;
-using PlayTennis.Web.ViewModels.TrainerVotes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Web.Controllers
+﻿namespace PlayTennis.Web.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using PlayTennis.Services.Data;
+    using PlayTennis.Web.ViewModels.TrainerVotes;
+
     [ApiController]
     [Route("api/[Controller]")]
 

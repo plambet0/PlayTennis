@@ -17,8 +17,12 @@
         private readonly IRepository<ApplicationUser> userRepository;
         private readonly IRepository<UserClub> userClubsRepostiroty;
 
-        public PlayersService(IRepository<Player> playersRepository, IRepository<Trainer> trainerRepository, IRepository<Club> clubRepository,
-            IRepository<ApplicationUser> userRepository, IRepository<UserClub> userClubsRepostiroty)
+        public PlayersService(
+            IRepository<Player> playersRepository,
+            IRepository<Trainer> trainerRepository,
+            IRepository<Club> clubRepository,
+            IRepository<ApplicationUser> userRepository,
+            IRepository<UserClub> userClubsRepostiroty)
         {
             this.playersRepository = playersRepository;
             this.trainerRepository = trainerRepository;
@@ -31,14 +35,16 @@
         {
             var club = this.clubRepository.All().Where(x => x.Id == clubId).FirstOrDefault();
             var user = this.userRepository.All().Where(x => x.Id == userId).FirstOrDefault();
-            
+            if (this.userClubsRepostiroty.All().Any(x => x.ClubId == clubId && x.UserId == userId))
+            {
+                return;
+            }
+
             user.FavoriteClubs.Add(new UserClub
             {
                 UserId = userId,
                 ClubId = clubId,
             });
-
-
             await this.userRepository.SaveChangesAsync();
         }
 
@@ -68,7 +74,6 @@
 
         public async Task DeleteFromFavoritesAsync(int clubId, string userId)
         {
-
             var club = this.clubRepository.All().Where(x => x.Id == clubId).FirstOrDefault();
             var user = this.userRepository.All().Where(x => x.Id == userId).FirstOrDefault();
             var clubToDelete = this.userClubsRepostiroty.All().Where(x => x.UserId == userId && x.ClubId == clubId).FirstOrDefault();
@@ -76,11 +81,9 @@
             {
                 return;
             }
+
             this.userClubsRepostiroty.Delete(clubToDelete);
             await this.userClubsRepostiroty.SaveChangesAsync();
-
-
-
         }
 
         public IEnumerable<PlayersViewModel> GetAll(int page, int itemsPerPage = 12)
@@ -140,7 +143,6 @@
                      PreferredSurface = x.PreferredSurface,
                      Town = x.Town,
                      Years = x.Years,
-
                 }).FirstOrDefault();
 
             return player;

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace PlayTennis.Web.ViewModels.ClubVotes
+﻿namespace PlayTennis.Web.ViewModels.ClubVotes
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class PostClubVoteInputModel
     {
         public int ClubId { get; set; }

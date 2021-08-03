@@ -1,7 +1,5 @@
-﻿
-namespace PlayTennis.Web.ViewModels.Club
+﻿namespace PlayTennis.Web.ViewModels.Club
 {
-    using System.Collections;
     using System.Collections.Generic;
 
     public class AllClubsViewModel : PagingViewModel
