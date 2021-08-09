@@ -31,5 +31,12 @@
 
             public const int PhoneNumberMaxLenght = 10;
         }
+
+        public static class AccountsSeeding
+        {
+            public const string Password = "123456";
+
+            public const string AdminEmail = "admin@admin.com";
+        }
     }
 }

@@ -11,42 +11,44 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
 
-        
-            var user = await this.UserManager.GetUserAsync(this.User);
-            var isTrainer = this.Trainers.IsRegistered(user.Id);
-            var isPlayer = this.Players.IsRegistered(user.Id);
-        
 
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="All">Clubs</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="All">Players</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Trainer" asp-action="All">Trainers</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="Add">Add Your Club</a>
-        </li>
-        if (!isPlayer && !isTrainer)
+        var user = await this.UserManager.GetUserAsync(this.User);
+        var isTrainer = this.Trainers.IsRegistered(user.Id);
+        var isPlayer = this.Players.IsRegistered(user.Id);
+
+        if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="Add">Become Player</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="All">Clubs</a>
             </li>
-        }
-        if (!isTrainer && !isPlayer)
-        {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Trainer" asp-action="Add">Become Trainer</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="All">Players</a>
             </li>
-        }
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="MyFavoriteClubs">My Favorite Clubs</a>
-        </li>
-        <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Trainer" asp-action="All">Trainers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="Add">Add Your Club</a>
+            </li>
+            if (!isPlayer && !isTrainer)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="Add">Become Player</a>
+                </li>
+            }
+            if (!isTrainer && !isPlayer)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Trainer" asp-action="Add">Become Trainer</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="MyFavoriteClubs">My Favorite Clubs</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="All">My Reservations</a>
-        </li>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.User.Identity.Name!</a>
         </li>

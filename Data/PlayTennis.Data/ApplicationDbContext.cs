@@ -94,8 +94,22 @@
             builder.Entity<UserClub>()
             .HasOne<ApplicationUser>(u => u.User)
             .WithMany(u => u.FavoriteClubs)
-            .OnDelete(DeleteBehavior.Cascade); 
+            .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Club>()
+                .HasMany(x => x.Votes)
+                .WithOne(x => x.Club)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Club>()
+                .HasMany(x => x.Reservations)
+                .WithOne(x => x.Club)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Trainer>()
+               .HasMany(x => x.Votes)
+               .WithOne(x => x.Trainer)
+               .OnDelete(DeleteBehavior.Cascade);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

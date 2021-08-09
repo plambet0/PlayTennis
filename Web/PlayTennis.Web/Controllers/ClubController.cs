@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using PlayTennis.Common;
     using PlayTennis.Data;
     using PlayTennis.Data.Models;
     using PlayTennis.Services.Data;
@@ -27,14 +28,14 @@
             this.applicationDbContext = applicationDbContext;
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Add()
         {
             return this.View();
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> AddAsync(ClubInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -42,7 +43,6 @@
                 return this.View(input);
             }
 
-            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
             try
             {
@@ -83,6 +83,14 @@
         {
             var club = this.clubsService.GetById(id);
             return this.View(club);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.clubsService.DeleteAsync(id);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

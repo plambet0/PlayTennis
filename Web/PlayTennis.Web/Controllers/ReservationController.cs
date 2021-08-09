@@ -79,6 +79,11 @@
                 return this.RedirectToAction("MakeAReservation");
             }
 
+            if (string.IsNullOrWhiteSpace(input.Date) || string.IsNullOrWhiteSpace(input.Time))
+            {
+                return this.RedirectToAction("MakeAReservation");
+            }
+
             DateTime dateTime;
             dateTime = this.dateTimeParseService.ConvertStrings(input.Date, input.Time);
             try

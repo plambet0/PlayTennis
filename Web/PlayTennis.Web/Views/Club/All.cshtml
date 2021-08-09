@@ -4,24 +4,27 @@
     ViewBag.Title = "All Clubs";
 }
 
-<div class="row">
-    @foreach (var club in Model.Clubs)
-    {
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <img class="card-img-top" src="@club.ImageUrl" alt="@club.Name @club.Town @club.Surface">
-                <div class="card-body text-center">
-                    <h2 class="card-title text-center font-weight-bold">@club.Name</h2>
-                    <h5 class="card-title text-center">@club.Address</h5>
-                    <h5 class="card-title text-center">Courts: @club.Courts Surface: @club.Surface</h5>
-                    <h5 class="card-title text-center">@club.PricePerHour lv./hour</h5>
-                    <a asp-controller="Club" asp-action="Details" asp-route-id="@club.Id" class="btn btn-primary">RESERVE COURT</a>
+@if (@Model.Clubs.Count() == 0 && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <div class="row">
+        <div class="col-lg-4 ml-lg-5">
+            <div class="about_text_2">
+                <p>
+                    You don`t have any favorite clubs yet...
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-lg-5">
+                    <div class="button button-large button_1 elements_button mt-4">
+                        <a asp-area="" asp-controller="Club" asp-action="All">
+                            <span>Find Clubs</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    }
-</div>
+    </div>
+}
+    <partial name="_AllClubsPartial" model="@Model" />
 
-<hr />
-
-<partial name="_PagingPartial" model="@Model" />
+    <partial name="_PagingPartial" model="@Model" />

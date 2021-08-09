@@ -38,6 +38,13 @@
             await this.clubRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var club = this.clubRepository.All().FirstOrDefault(x => x.Id == id);
+            this.clubRepository.Delete(club);
+            await this.clubRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12)
         {
             var clubs = this.clubRepository.AllAsNoTracking()

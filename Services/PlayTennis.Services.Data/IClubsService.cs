@@ -12,5 +12,7 @@
         IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12);
 
         ClubDetailsViewModel GetById(int id);
+
+        Task DeleteAsync(int id);
     }
 }
