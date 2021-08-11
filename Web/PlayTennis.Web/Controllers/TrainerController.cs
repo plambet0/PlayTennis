@@ -10,6 +10,8 @@
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Trainer;
 
+    using static PlayTennis.Web.WebConstants;
+
     public class TrainerController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -28,6 +30,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddAsync(TrainerInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -52,9 +55,9 @@
                 return this.View(input);
             }
 
-            this.TempData["Message"] = "Trainer added successfully.";
+            this.TempData[GlobalMessageKey] = "Trainer added successfully.";
 
-            return this.Redirect("/Trainer/All");
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult All(int id = 1)

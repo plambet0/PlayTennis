@@ -23,5 +23,7 @@
         IEnumerable<ClubsViewModel> GetAllFavorites( string userId, int page, int itemsPerPage = 12);
 
         Task DeleteFromFavoritesAsync(int clubId, string userId);
+
+        Task DeleteAsync(int id);
     }
 }

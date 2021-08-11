@@ -13,6 +13,8 @@
     using PlayTennis.Web.ViewModels.Club;
     using PlayTennis.Web.ViewModels.Player;
 
+    using static PlayTennis.Web.WebConstants;
+
     public class PlayerController : Controller
     {
         private readonly ApplicationDbContext applicationDbContext;
@@ -61,7 +63,7 @@
                 return this.View(input);
             }
 
-            this.TempData["Message"] = "Player added successfully.";
+            this.TempData[GlobalMessageKey] = "Player added successfully.";
 
             return this.RedirectToAction(nameof(this.All));
         }

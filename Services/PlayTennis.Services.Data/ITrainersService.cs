@@ -16,5 +16,7 @@
         bool IsRegistered(string userId);
 
         TrainerDetailsViewModel GetById(int id);
+
+        Task DeleteAsync(int id);
     }
 }

@@ -1,14 +1,15 @@
-﻿using PlayTennis.Data.Common.Repositories;
-using PlayTennis.Data.Models;
-using PlayTennis.Web.ViewModels.Trainer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using PlayTennis.Data.Common.Repositories;
+    using PlayTennis.Data.Models;
+    using PlayTennis.Web.ViewModels.Trainer;
+
     public class TrainerService : ITrainersService
     {
         private readonly IRepository<Trainer> trainerRepository;
@@ -37,6 +38,13 @@ namespace PlayTennis.Services.Data
             };
 
             await this.trainerRepository.AddAsync(trainer);
+            await this.trainerRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var trainer = this.trainerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            this.trainerRepository.Delete(trainer);
             await this.trainerRepository.SaveChangesAsync();
         }
 

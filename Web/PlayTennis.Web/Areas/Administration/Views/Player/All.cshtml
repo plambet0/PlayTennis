@@ -1,0 +1,29 @@
+﻿@model AllPlayersViewModel;
+
+@{
+    ViewBag.Title = "All Players";
+}
+
+<div class="row">
+    @foreach (var player in Model.Players)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@player.ImageUrl" alt="@player.FullName @player.Years @player.Town">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@player.FullName @player.Years years old @player.Town</h5>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger"
+                                asp-area="Administration" asp-controller="Player" asp-action="Delete" asp-route-id="@player.Id">
+                            DELETE PLAYER
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr />
+
+<partial name="_PagingPartial" model="@Model" />

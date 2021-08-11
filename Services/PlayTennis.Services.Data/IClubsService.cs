@@ -13,6 +13,10 @@
 
         ClubDetailsViewModel GetById(int id);
 
+        EditClubInputModel EditById(int id);
+
         Task DeleteAsync(int id);
+
+        Task UpdateAsync(int id, EditClubInputModel input);
     }
 }

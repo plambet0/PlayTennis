@@ -14,6 +14,8 @@
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Reservation;
 
+    using static PlayTennis.Web.WebConstants;
+
     public class ReservationController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -96,7 +98,7 @@
                 return this.View(input);
             }
 
-            this.TempData["Message"] = "Reservation added successfully.";
+            this.TempData[GlobalMessageKey] = "Reservation added successfully.";
 
             return this.Redirect("/Reservation/All");
         }

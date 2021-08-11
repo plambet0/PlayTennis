@@ -45,6 +45,22 @@
             await this.clubRepository.SaveChangesAsync();
         }
 
+        public EditClubInputModel EditById(int id)
+        {
+            var club = this.clubRepository.All().Where(x => x.Id == id).Select(x => new EditClubInputModel
+            {
+                Address = x.Address,
+                ImageUrl = x.ImageUrl,
+                Courts = x.Courts,
+                Name = x.Name,
+                PricePerHour = x.PricePerHour,
+                Surface = x.Surface,
+                Town = x.Town,
+            }).FirstOrDefault();
+
+            return club;
+        }
+
         public IEnumerable<ClubsViewModel> GetAll(int page, int itemsPerPage = 12)
         {
             var clubs = this.clubRepository.AllAsNoTracking()
@@ -82,6 +98,19 @@
             }).FirstOrDefault();
 
             return club;
+        }
+
+        public async Task UpdateAsync(int id, EditClubInputModel input)
+        {
+            var club = this.clubRepository.All().FirstOrDefault(x => x.Id == id);
+            club.Name = input.Name;
+            club.Address = input.Address;
+            club.Courts = input.Courts;
+            club.ImageUrl = input.ImageUrl;
+            club.PricePerHour = input.PricePerHour;
+            club.Surface = input.Surface;
+            club.Town = input.Town;
+            await this.clubRepository.SaveChangesAsync();
         }
     }
 }

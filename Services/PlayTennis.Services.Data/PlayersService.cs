@@ -72,6 +72,13 @@
             await this.playersRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var player = this.playersRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            this.playersRepository.Delete(player);
+            await this.playersRepository.SaveChangesAsync();
+        }
+
         public async Task DeleteFromFavoritesAsync(int clubId, string userId)
         {
             var club = this.clubRepository.All().Where(x => x.Id == clubId).FirstOrDefault();

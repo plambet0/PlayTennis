@@ -1,0 +1,55 @@
+﻿@model EditClubInputModel;
+
+@{
+    ViewBag.Title = "Edit Club";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" placeholder="str.Tsar Osvoboditel 103, ent.3, appt.1">
+                <span asp-validation-for="Address" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Courts"></label>
+                <input asp-for="Courts" class="form-control">
+                <span asp-validation-for="Courts" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="https://">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePerHour"></label>
+                <input asp-for="PricePerHour" class="form-control">
+                <span asp-validation-for="PricePerHour" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surface "></label>
+                <select asp-for="Surface" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Surface>()">
+                </select>
+                <span asp-validation-for="Surface" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Town "></label>
+                <select asp-for="Town" class="form-control" asp-items="@Html.GetEnumSelectList
+                <PlayTennis.Data.Models.Town>()">
+                </select>
+                <span asp-validation-for="Town" class="text-danger"></span>
+            </div>
+
+            <input class="btn btn-primary mt-3" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

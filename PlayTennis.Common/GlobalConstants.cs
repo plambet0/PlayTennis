@@ -6,6 +6,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdministratorEmail = "admin@admin.com";
+
         public static class DateTimeFormats
         {
             public const string DateFormat = "dd-MM-yyyy";
