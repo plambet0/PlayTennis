@@ -70,7 +70,6 @@
         [Authorize]
         public async Task<IActionResult> MakeAReservation(ReservationViewModel input, int id)
         {
-
             var club = this.db.Clubs.Where(x => x.Id == id).FirstOrDefault();
             var user = await this.userManager.GetUserAsync(this.User);
             var player = this.db.Players.Where(x => x.UserId == user.Id).FirstOrDefault();

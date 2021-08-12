@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlayTennis.Services.Data
+﻿namespace PlayTennis.Services.Data
 {
+    using System.Threading.Tasks;
+
     public interface IClubVoteService
     {
         Task SetVoteAsync(int clubId, string userId, byte value);

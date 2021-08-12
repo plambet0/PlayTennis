@@ -100,6 +100,11 @@
             return club;
         }
 
+        public int GetCount()
+        {
+            return this.clubRepository.All().Count();
+        }
+
         public async Task UpdateAsync(int id, EditClubInputModel input)
         {
             var club = this.clubRepository.All().FirstOrDefault(x => x.Id == id);

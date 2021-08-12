@@ -1,6 +1,5 @@
 ﻿namespace PlayTennis.Web.Areas.Administration.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
@@ -30,12 +29,13 @@
             }
 
             const int itemsPerPage = 12;
-            var trainers = this.trainersService.GetAll(1, itemsPerPage);
+            var trainers = this.trainersService.GetAll(id, itemsPerPage);
             var viewModel = new AllTrainersViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Trainers = trainers,
+                ItemsCount = this.trainersService.GetCount(),
             };
             return this.View(viewModel);
         }
@@ -44,6 +44,7 @@
         public async Task<IActionResult> Delete(int id)
         {
             await this.trainersService.DeleteAsync(id);
+            this.TempData[GlobalMessageKey] = "Trainer deleted successfully.";
             return this.RedirectToAction(nameof(this.All));
         }
     }

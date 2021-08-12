@@ -9,6 +9,8 @@
     using PlayTennis.Services.Data;
     using PlayTennis.Web.ViewModels.Player;
 
+    using static PlayTennis.Web.WebConstants;
+
     public class PlayerController : AdministrationController
     {
         private readonly ApplicationDbContext applicationDbContext;
@@ -33,12 +35,13 @@
             }
 
             const int itemsPerPage = 12;
-            var players = this.playerService.GetAll(1, itemsPerPage);
+            var players = this.playerService.GetAll(id, itemsPerPage);
             var viewModel = new AllPlayersViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Players = players,
+                ItemsCount = this.playerService.GetCount(),
             };
             return this.View(viewModel);
         }
@@ -47,6 +50,7 @@
         public async Task<IActionResult> Delete(int id)
         {
             await this.playerService.DeleteAsync(id);
+            this.TempData[GlobalMessageKey] = "Player deleted successfully.";
             return this.RedirectToAction(nameof(this.All));
         }
     }

@@ -65,12 +65,13 @@
             }
 
             const int itemsPerPage = 12;
-            var clubs = this.clubsService.GetAll(1, itemsPerPage);
+            var clubs = this.clubsService.GetAll(id, itemsPerPage);
             var viewModel = new AllClubsViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Clubs = clubs,
+                ItemsCount = this.clubsService.GetCount(),
             };
             return this.View(viewModel);
         }
@@ -79,6 +80,8 @@
         public async Task<IActionResult> Delete(int id)
         {
             await this.clubsService.DeleteAsync(id);
+
+            this.TempData[GlobalMessageKey] = "Club deleted successfully.";
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -95,6 +98,8 @@
             {
                 return this.View(input);
             }
+
+            this.TempData[GlobalMessageKey] = "Club edited successfully.";
 
             await this.clubsService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.All));

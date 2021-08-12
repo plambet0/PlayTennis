@@ -18,5 +18,7 @@
         Task DeleteAsync(int id);
 
         Task UpdateAsync(int id, EditClubInputModel input);
+
+        int GetCount();
     }
 }

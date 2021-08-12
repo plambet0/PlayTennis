@@ -1,6 +1,6 @@
 ﻿namespace PlayTennis.Web.ViewModels.Club
 {
-    using System;
+
     using System.ComponentModel.DataAnnotations;
 
     using PlayTennis.Common;

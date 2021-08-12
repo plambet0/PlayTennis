@@ -4,7 +4,6 @@
 
     public interface IHomePageCountsService
     {
-
         IndexViewModel GetCounts();
     }
 }

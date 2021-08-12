@@ -25,5 +25,7 @@
         Task DeleteFromFavoritesAsync(int clubId, string userId);
 
         Task DeleteAsync(int id);
+
+        int GetCount();
     }
 }

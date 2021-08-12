@@ -18,5 +18,7 @@
         TrainerDetailsViewModel GetById(int id);
 
         Task DeleteAsync(int id);
+
+        int GetCount();
     }
 }

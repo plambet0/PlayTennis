@@ -38,7 +38,6 @@
                 return this.View(input);
             }
 
-            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await this.userManager.GetUserAsync(this.User);
             if (this.trainersService.IsAPlayer(user.Id) || this.trainersService.IsRegistered(user.Id))
             {
@@ -68,12 +67,13 @@
             }
 
             const int itemsPerPage = 12;
-            var trainers = this.trainersService.GetAll(1, itemsPerPage);
+            var trainers = this.trainersService.GetAll(id, itemsPerPage);
             var viewModel = new AllTrainersViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Trainers = trainers,
+                ItemsCount = this.trainersService.GetCount(),
             };
             return this.View(viewModel);
         }

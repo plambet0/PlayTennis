@@ -59,7 +59,6 @@
                 options.HeaderName = "X-CSRF-TOKEN";
             });
 
-
             services.AddSingleton(this.configuration);
 
             // Data repositories

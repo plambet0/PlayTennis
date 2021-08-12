@@ -155,6 +155,11 @@
             return player;
         }
 
+        public int GetCount()
+        {
+            return this.playersRepository.All().Count();
+        }
+
         public bool IsATrainer(string userId)
         {
             var trainer = this.trainerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();

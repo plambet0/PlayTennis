@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlayTennis.Services
+﻿namespace PlayTennis.Services
 {
+    using System;
+
     public interface IDateTimeParseService
     {
         DateTime ConvertStrings(string date, string time);

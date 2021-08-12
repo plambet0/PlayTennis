@@ -1,9 +1,7 @@
 ﻿namespace PlayTennis.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using PlayTennis.Data.Common.Repositories;
@@ -87,6 +85,11 @@
             }).FirstOrDefault();
 
             return trainer;
+        }
+
+        public int GetCount()
+        {
+            return this.trainerRepository.All().Count();
         }
 
         public bool IsAPlayer(string userId)

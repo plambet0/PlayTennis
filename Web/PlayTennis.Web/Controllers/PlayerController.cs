@@ -77,12 +77,13 @@
             }
 
             const int itemsPerPage = 12;
-            var players = this.playerService.GetAll(1, itemsPerPage);
+            var players = this.playerService.GetAll(id, itemsPerPage);
             var viewModel = new AllPlayersViewModel
             {
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
                 Players = players,
+                ItemsCount = this.playerService.GetCount(),
             };
             return this.View(viewModel);
         }
@@ -127,7 +128,6 @@
         [Authorize]
         public async Task<ActionResult> DeleteFromFavorites(int clubId)
         {
-
             var user = await this.userManager.GetUserAsync(this.User);
             await this.playerService.DeleteFromFavoritesAsync(clubId, user.Id);
             return this.Redirect("/Player/MyFavoriteClubs");

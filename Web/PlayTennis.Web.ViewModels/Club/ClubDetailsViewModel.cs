@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlayTennis.Web.ViewModels.Club
+﻿namespace PlayTennis.Web.ViewModels.Club
 {
     public class ClubDetailsViewModel : ClubsViewModel
     {
