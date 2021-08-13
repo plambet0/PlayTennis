@@ -12,8 +12,8 @@
                 <img class="card-img-top" src="@club.ImageUrl" alt="@club.Name @club.Town @club.Surface">
                 <div class="card-body text-center">
                     <h2 class="card-title text-center font-weight-bold">@club.Name</h2>
-                    <h5 class="card-title text-center">@club.Address</h5>
-                    <h5 class="card-title text-center">Courts: @club.Courts Surface: @club.Surface</h5>
+                    <h5 class="card-title text-center">@club.Town</h5>
+                    <h5 class="card-title text-center">@club.Surface</h5>
                     <h5 class="card-title text-center">@club.PricePerHour lv./hour</h5>
                     <a asp-controller="Club" asp-action="Details" asp-route-id="@club.Id" class="btn btn-primary">RESERVE COURT</a>
                 </div>
