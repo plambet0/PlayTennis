@@ -40,5 +40,10 @@
 
             public const string AdminEmail = "admin@admin.com";
         }
+
+        public static class Images
+        {
+            public const string Error404 = "https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png";
+        }
     }
 }

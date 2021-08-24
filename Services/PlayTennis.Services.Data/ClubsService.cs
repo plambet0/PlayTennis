@@ -11,14 +11,10 @@
     public class ClubsService : IClubsService
     {
         private readonly IRepository<Club> clubRepository;
-        private readonly IRepository<Player> playerRepository;
-        private readonly IRepository<UserClub> playerClubsRepository;
 
-        public ClubsService(IRepository<Club> clubRepository, IRepository<Player> playerRepository, IRepository<UserClub> playerClubsRepository)
+        public ClubsService(IRepository<Club> clubRepository)
         {
             this.clubRepository = clubRepository;
-            this.playerRepository = playerRepository;
-            this.playerClubsRepository = playerClubsRepository;
         }
 
         public async Task CreateAsync(ClubInputModel input, string userId)
