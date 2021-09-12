@@ -1,1 +1,1 @@
-# PlayTennis
+This App is for tennis lovers who want to find other players in their town and play together. There is option for club founders to register their clubs. Each player could make a reservation in those clubs. He can rate the clubs and add them to favorites. He can find trainers nearby as well. The app provides admin area, where the admin could make crud operations to all of the entities. 
