@@ -52,6 +52,7 @@
                 PricePerHour = x.PricePerHour,
                 Surface = x.Surface,
                 Town = x.Town,
+                Id = x.Id,
             }).FirstOrDefault();
 
             return club;
@@ -63,6 +64,27 @@
                  .OrderByDescending(x => x.Id)
                  .Skip((page - 1) * itemsPerPage)
                  .Take(itemsPerPage)
+                 .Select(x => new ClubsViewModel
+                 {
+                     Name = x.Name,
+                     Address = x.Address,
+                     ImageUrl = x.ImageUrl,
+                     Courts = x.Courts,
+                     PricePerHour = x.PricePerHour,
+                     Surface = x.Surface.ToString(),
+                     Town = x.Town.ToString(),
+                     Id = x.Id,
+                 })
+                 .ToList();
+            return clubs;
+        }
+
+        public IEnumerable<ClubsViewModel> GetAllByTown(string town)
+        {
+            var clubs = this.clubRepository.AllAsNoTracking()
+                .ToList()
+                .Where(x => x.Town.ToString().ToLower() == town.ToLower())
+                 .OrderByDescending(x => x.Id)
                  .Select(x => new ClubsViewModel
                  {
                      Name = x.Name,
@@ -111,6 +133,7 @@
             club.PricePerHour = input.PricePerHour;
             club.Surface = input.Surface;
             club.Town = input.Town;
+            club.Id = input.Id;
             await this.clubRepository.SaveChangesAsync();
         }
     }

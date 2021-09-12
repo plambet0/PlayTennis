@@ -41,5 +41,15 @@
             var club = this.clubsService.GetById(id);
             return this.View(club);
         }
+
+        public IActionResult GetAllByTown(string town)
+        {
+            var clubs = this.clubsService.GetAllByTown(town);
+            var viewModel = new AllClubsViewModel
+            {
+                Clubs = clubs,
+            };
+            return this.View(viewModel);
+        }
     }
 }

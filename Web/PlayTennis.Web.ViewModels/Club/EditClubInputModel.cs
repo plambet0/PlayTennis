@@ -2,5 +2,6 @@
 {
     public class EditClubInputModel : ClubInputModel
     {
+        public int Id { get; set; }
     }
 }

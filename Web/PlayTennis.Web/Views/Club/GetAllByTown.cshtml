@@ -4,7 +4,7 @@
     ViewBag.Title = "All Clubs";
 }
 
-@if (@Model.Clubs.Count() == 0 )
+@if (@Model.Clubs.Count() == 0)
 {
     <div class="row">
         <div class="col-lg-4 ml-lg-5">
@@ -31,12 +31,10 @@
         <tr>
             <td>Select Town: </td>
             <td><input type="text" id="txtTown" name="town" /></td>
-            <td><input type="submit" value="Submit" /></td>
+            <td><input type="submit" value="Find" /></td>
         </tr>
     </table>
     <hr />
 </form>
 
-    <partial name="_AllClubsPartial" model="@Model" />
-
-    <partial name="_PagingPartial" model="@Model" />
+<partial name="_AllClubsPartial" model="@Model" />

@@ -93,11 +93,13 @@
 
             if (env.IsDevelopment())
             {
+                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                app.UseDatabaseErrorPage();
             }
             else
             {
+                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }

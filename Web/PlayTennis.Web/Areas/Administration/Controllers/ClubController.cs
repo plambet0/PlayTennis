@@ -87,8 +87,8 @@
 
         public IActionResult Edit(int id)
         {
-            var inputModel = this.clubsService.EditById(id);
-            return this.View(inputModel);
+            var viewModel = this.clubsService.EditById(id);
+            return this.View(viewModel);
         }
 
         [HttpPost]

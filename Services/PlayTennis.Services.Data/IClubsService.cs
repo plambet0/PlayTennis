@@ -20,5 +20,7 @@
         Task UpdateAsync(int id, EditClubInputModel input);
 
         int GetCount();
+
+        IEnumerable<ClubsViewModel> GetAllByTown(string town);
     }
 }
