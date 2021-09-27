@@ -12,20 +12,23 @@
         public string FirstName { get; set; }
 
         [Required]
-
         [MaxLength(GlobalConstants.DataValidations.TrainerLastNameMaxLenght)]
         public string LastName { get; set; }
 
         public Gender Gender { get; set; }
 
+        [Range(1, 100, ErrorMessage = "Invalid Age")]
         public int Years { get; set; }
 
         [Display(Name = "Image URL")]
+        [Required(ErrorMessage = "Invalid Image Url")]
         public string ImageUrl { get; set; }
 
         [Display(Name = "Trainer Since")]
+        [Range(1, 100)]
         public int TrainerSinceInYears { get; set; }
 
+        [Range(1, 1000, ErrorMessage = "Ivalid Price")]
         public decimal PricePerHour { get; set; }
 
         [Required]
@@ -34,7 +37,7 @@
         public string PhoneNumber { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         [Required]

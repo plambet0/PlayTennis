@@ -19,12 +19,14 @@
 
         [Required]
         [Display(Name = "Number of courts for play")]
+        [Range(1, 30, ErrorMessage = "Invalid number")]
         public int Courts { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Invalid Image Url")]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
+        [Range(1, 1000, ErrorMessage = "Invalid Price")]
         [Display(Name = "Price per hour (lv.)")]
         public decimal PricePerHour { get; set; }
 
